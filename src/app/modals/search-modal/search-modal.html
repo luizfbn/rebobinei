@@ -1,0 +1,16 @@
+<app-base-modal (onClose)="close()">
+    <form
+        class="bg-neutral-800 p-3 rounded-2xl border border-neutral-900 max-w-4xl h-fit w-full m-4"
+        [formGroup]="searchForm"
+        (ngSubmit)="submit()"
+    >
+        <input
+            type="text"
+            class="input w-full"
+            placeholder="Buscar"
+            formControlName="searchInput"
+            #searchInput
+        />
+        <input type="submit" [disabled]="searchForm.invalid" hidden />
+    </form>
+</app-base-modal>
