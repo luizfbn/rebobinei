@@ -3,10 +3,10 @@ import { Component, HostListener, output } from '@angular/core';
 @Component({
     selector: 'app-base-modal',
     imports: [],
-    templateUrl: './base-modal.html',
-    styleUrl: './base-modal.css',
+    templateUrl: './base-modal.component.html',
+    styleUrl: './base-modal.component.css',
 })
-export class BaseModal {
+export class BaseModalComponent {
     onClose = output<void>();
 
     @HostListener('document:keydown.escape')

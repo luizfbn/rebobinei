@@ -6,15 +6,15 @@ import {
     ValidationErrors,
     Validators,
 } from '@angular/forms';
-import { BaseModal } from '../../shared/components/base-modal/base-modal';
+import { BaseModalComponent } from '../../shared/components/base-modal/base-modal.component';
 
 @Component({
     selector: 'app-search-modal',
-    imports: [BaseModal, ReactiveFormsModule],
-    templateUrl: './search-modal.html',
-    styleUrl: './search-modal.css',
+    imports: [BaseModalComponent, ReactiveFormsModule],
+    templateUrl: './search-modal.component.html',
+    styleUrl: './search-modal.component.css',
 })
-export class SearchModal {
+export class SearchModalComponent {
     onClose = output<void>();
 
     searchForm = new FormGroup({
