@@ -7,7 +7,7 @@
             class="input w-full max-w-80 flex justify-between gap-2 items-center cursor-pointer sm:px-4 sm:py-2 p-2"
             type="button"
             title="Buscar"
-            (click)="isSearching = true"
+            (click)="openSearchModal()"
         >
             <span class="text-neutral-400 text-sm">Buscar</span>
             <svg
@@ -26,6 +26,4 @@
         <button class="btn-outline" type="button" title="Entrar">Entrar</button>
     </nav>
 </header>
-@if(isSearching) {
-<app-search-modal (onClose)="isSearching = false"></app-search-modal>
-}
+<ng-container #searchModal></ng-container>

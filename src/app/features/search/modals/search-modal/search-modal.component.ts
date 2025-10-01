@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild, output } from '@angular/core';
+import { Component, ElementRef, ViewChild, inject, output } from '@angular/core';
 import {
     FormControl,
     FormGroup,
@@ -6,15 +6,20 @@ import {
     ValidationErrors,
     Validators,
 } from '@angular/forms';
-import { BaseModalComponent } from '../../shared/components/base-modal/base-modal.component';
+import { ModalRef } from '../../../../shared/modal/modal-ref';
 
 @Component({
     selector: 'app-search-modal',
-    imports: [BaseModalComponent, ReactiveFormsModule],
+    imports: [ReactiveFormsModule],
     templateUrl: './search-modal.component.html',
     styleUrl: './search-modal.component.css',
+    host: {
+        class: 'contents',
+    },
 })
 export class SearchModalComponent {
+    modalRef = inject(ModalRef<void>);
+
     onClose = output<void>();
 
     searchForm = new FormGroup({
@@ -30,11 +35,7 @@ export class SearchModalComponent {
 
     submit() {
         console.log('Search:', this.searchForm.value.searchInput);
-        this.close();
-    }
-
-    close() {
-        this.onClose.emit();
+        this.modalRef.close();
     }
 
     noWhitespaceValidator(control: FormControl<string>): ValidationErrors | null {
