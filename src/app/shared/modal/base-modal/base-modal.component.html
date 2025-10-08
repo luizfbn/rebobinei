@@ -1,6 +1,7 @@
 <div
     class="fixed inset-0 bg-neutral-900/50 flex justify-center overflow-y-auto z-10"
-    (click)="close()"
+    (mouseup)="onOverlayMouseUp($event)"
+    (mousedown)="onOverlayMouseDown($event)"
 >
     <div class="contents" (click)="$event.stopPropagation()">
         <ng-container #contentHost></ng-container>

@@ -1,12 +1,4 @@
-import {
-    Component,
-    HostListener,
-    Injector,
-    output,
-    Type,
-    ViewChild,
-    ViewContainerRef,
-} from '@angular/core';
+import { Component, Injector, output, Type, ViewChild, ViewContainerRef } from '@angular/core';
 
 @Component({
     selector: 'app-base-modal',
@@ -16,6 +8,7 @@ import {
 })
 export class BaseModalComponent {
     onClose = output<void>();
+    isMouseDownOnOverlay = false;
 
     @ViewChild('contentHost', { read: ViewContainerRef, static: true })
     contentHost!: ViewContainerRef;
@@ -25,7 +18,19 @@ export class BaseModalComponent {
         this.contentHost.createComponent(componentType, { injector });
     }
 
-    @HostListener('document:keydown.escape')
+    onOverlayMouseDown(event: MouseEvent) {
+        if (event.target === event.currentTarget) {
+            this.isMouseDownOnOverlay = true;
+        }
+    }
+
+    onOverlayMouseUp(event: MouseEvent) {
+        if (this.isMouseDownOnOverlay && event.target === event.currentTarget) {
+            this.close();
+        }
+        this.isMouseDownOnOverlay = false;
+    }
+
     close() {
         this.onClose.emit();
     }
