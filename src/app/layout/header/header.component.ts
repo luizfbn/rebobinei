@@ -1,6 +1,7 @@
 import { Component, inject, ViewChild, ViewContainerRef } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { SearchModalService } from '../../features/search/modals/search-modal/search-modal.service';
+import { AuthModalService } from '../../features/auth/modals/auth-modal/auth-modal.service';
 
 @Component({
     selector: 'app-header',
@@ -10,6 +11,7 @@ import { SearchModalService } from '../../features/search/modals/search-modal/se
 })
 export class HeaderComponent {
     searchModalService = inject(SearchModalService);
+    authModalService = inject(AuthModalService);
 
     @ViewChild('searchModal', { read: ViewContainerRef })
     searchModalContainer!: ViewContainerRef;
@@ -18,6 +20,13 @@ export class HeaderComponent {
         const modalRef = this.searchModalService.open(this.searchModalContainer);
         modalRef.afterClosed.subscribe((result) => {
             console.log('Search modal closed', result);
+        });
+    }
+
+    openAuthModal() {
+        const modalRef = this.authModalService.open(this.searchModalContainer);
+        modalRef.afterClosed.subscribe((result) => {
+            console.log('Auth modal closed', result);
         });
     }
 }

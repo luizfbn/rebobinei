@@ -1,0 +1,65 @@
+<form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+    <div class="w-full mb-3 flex flex-col gap-1">
+        <label for="name" class="text-sm font-semibold text-neutral-200">Nome</label>
+        <input type="text" class="input" formControlName="name" />
+        @if (name?.invalid && name?.touched) {
+        <div class="text-xs font-normal text-red-400">
+            @if (name?.hasError('required')) {
+            <p>Informe o nome.</p>
+            } @else if (name?.hasError('minlength')) {
+            <p>O nome deve conter pelo menos 3 caracteres.</p>
+            } @else if (name?.hasError('whitespace')) {
+            <p>Informe um nome válido.</p>
+            }
+        </div>
+        }
+    </div>
+    <div class="w-full mb-3 flex flex-col gap-1">
+        <label for="username" class="text-sm font-semibold text-neutral-200">Nome de usuário</label>
+        <input type="text" class="input" formControlName="username" appRestrictSpaces />
+        @if (username?.invalid && username?.touched) {
+        <div class="text-xs font-normal text-red-400">
+            @if (username?.hasError('required')) {
+            <p>Informe o nome de usuário.</p>
+            } @else if (username?.hasError('minlength')) {
+            <p>O nome de usuário deve conter pelo menos 3 caracteres.</p>
+            } @else if (username?.hasError('whitespace')) {
+            <p>Informe um nome de usuário válido.</p>
+            } @else if (username?.hasError('specialcharacters')) {
+            <p>O nome de usuário pode conter apenas letras, números e underscores (sem espaços).</p>
+            }
+        </div>
+        }
+    </div>
+    <div class="w-full mb-3 flex flex-col gap-1">
+        <label for="email" class="text-sm font-semibold text-neutral-200">Email</label>
+        <input type="email" class="input" formControlName="email" />
+        @if (email?.invalid && email?.touched) {
+        <div class="text-xs font-normal text-red-400">
+            @if (email?.hasError('required')) {
+            <p>Informe o email.</p>
+            } @else if (email?.hasError('email')) {
+            <p>Informe um email válido.</p>
+            }
+        </div>
+        }
+    </div>
+    <div class="w-full mb-6 flex flex-col gap-1">
+        <label for="password" class="text-sm font-semibold text-neutral-200">Senha</label>
+        <input type="password" class="input" formControlName="password" />
+        @if (password?.pristine) {
+        <p class="text-xs font-normal text-neutral-400">Mínimo de 6 caracteres.</p>
+        } @if (password?.invalid && password?.touched) {
+        <div class="text-xs font-normal text-red-400">
+            @if (password?.hasError('required')) {
+            <p>Informe a senha.</p>
+            } @else if (password?.hasError('minlength')) {
+            <p>A senha deve conter pelo menos 6 caracteres.</p>
+            }
+        </div>
+        }
+    </div>
+    <button class="btn w-full" type="submit" title="Cadastrar" [disabled]="registerForm.invalid">
+        Cadastrar
+    </button>
+</form>

@@ -23,7 +23,9 @@
             </svg>
         </button>
         <span class="block w-[1px] h-9 rounded-xl bg-neutral-500"></span>
-        <button class="btn-outline" type="button" title="Entrar">Entrar</button>
+        <button class="btn-outline" type="button" title="Entrar" (click)="openAuthModal()">
+            Entrar
+        </button>
     </nav>
 </header>
 <ng-container #searchModal></ng-container>
