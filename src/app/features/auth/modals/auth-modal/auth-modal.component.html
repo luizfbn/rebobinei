@@ -1,5 +1,5 @@
 <section
-    class="bg-neutral-800 p-10 rounded-2xl border border-neutral-900 max-w-md h-fit w-full m-4 flex flex-col items-center relative"
+    class="bg-neutral-900 p-10 rounded-lg shadow-[0_0px_8px_2px] shadow-neutral-700/25 max-w-md h-fit w-full my-6 mx-4 flex flex-col items-center relative"
 >
     <button
         type="button"
@@ -7,10 +7,10 @@
         (click)="close()"
     >
         <svg
+            class="fill-neutral-700"
             width="24"
             height="24"
             viewBox="0 0 24 24"
-            fill="#444444"
             xmlns="http://www.w3.org/2000/svg"
         >
             <path
@@ -20,10 +20,10 @@
     </button>
     <div>
         <svg
+            class="fill-neutral-200"
             width="55"
             height="52"
             viewBox="0 0 55 52"
-            fill="#EDEDED"
             xmlns="http://www.w3.org/2000/svg"
         >
             <path
@@ -34,12 +34,12 @@
     @switch (view) { @case ('login') {
     <h2 class="text-neutral-200 font-semibold text-xl uppercase tracking-wide mb-10">Login</h2>
     <app-login-form (loginSubmit)="onLogin($event)" class="w-full"></app-login-form>
-    <span class="block max-w-20 w-full h-[1px] my-7 rounded-xl bg-neutral-500"></span>
+    <span class="block max-w-20 w-full h-[1px] my-7 rounded-lg bg-neutral-700"></span>
     <p class="text-sm text-neutral-400">
         Não tem uma conta?
         <button
             type="button"
-            class="hover:underline hover:underline-offset-4 text-red-500 cursor-pointer"
+            class="hover:underline hover:underline-offset-4 text-rose-500 cursor-pointer"
             (click)="setView('register')"
         >
             Crie uma conta
@@ -50,12 +50,12 @@
         Criar conta
     </h2>
     <app-register-form (registerSubmit)="onRegister($event)" class="w-full"></app-register-form>
-    <span class="block max-w-20 w-full h-[1px] my-7 rounded-xl bg-neutral-500"></span>
+    <span class="block max-w-20 w-full h-[1px] my-7 rounded-lg bg-neutral-700"></span>
     <p class="text-sm text-neutral-400">
         Já tem uma conta?
         <button
             type="button"
-            class="hover:underline hover:underline-offset-4 text-red-500 cursor-pointer"
+            class="hover:underline hover:underline-offset-4 text-rose-500 cursor-pointer"
             (click)="setView('login')"
         >
             Entre aqui

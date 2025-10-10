@@ -1,4 +1,4 @@
-<header class="bg-neutral-800 container py-6 flex flex-wrap justify-center items-center gap-6">
+<header class="bg-neutral-900 container py-6 flex flex-wrap justify-center items-center gap-6">
     <a routerLink="/">
         <img src="assets/logo.svg" alt="Rebobinei logo" />
     </a>
@@ -7,7 +7,7 @@
             (onClick)="openSearchModal()"
             class="w-full max-w-80"
         ></app-search-trigger>
-        <span class="block w-[1px] h-9 rounded-xl bg-neutral-500"></span>
+        <span class="block w-[1px] h-9 rounded-lg bg-neutral-700"></span>
         @if(isLoggedIn) {
         <app-user-menu></app-user-menu>
         } @else {
