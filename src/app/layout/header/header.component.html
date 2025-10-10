@@ -23,9 +23,13 @@
             </svg>
         </button>
         <span class="block w-[1px] h-9 rounded-xl bg-neutral-500"></span>
+        @if(isLoggedIn) {
+        <app-user-menu></app-user-menu>
+        } @else {
         <button class="btn-outline" type="button" title="Entrar" (click)="openAuthModal()">
             Entrar
         </button>
+        }
     </nav>
 </header>
 <ng-container #searchModal></ng-container>
