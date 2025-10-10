@@ -3,10 +3,11 @@ import { RouterLink } from '@angular/router';
 import { SearchModalService } from '../../features/search/modals/search-modal/search-modal.service';
 import { AuthModalService } from '../../features/auth/modals/auth-modal/auth-modal.service';
 import { UserMenuComponent } from '../../shared/components/user-menu/user-menu.component';
+import { SearchTriggerComponent } from '../../features/search/components/search-trigger/search-trigger.component';
 
 @Component({
     selector: 'app-header',
-    imports: [RouterLink, UserMenuComponent],
+    imports: [RouterLink, UserMenuComponent, SearchTriggerComponent],
     templateUrl: './header.component.html',
     styleUrl: './header.component.css',
 })
