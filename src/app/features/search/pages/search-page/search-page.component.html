@@ -14,4 +14,10 @@
             ></app-media-card>
         </li>
     </ul>
+    <app-page-selector
+        class="flex justify-center"
+        [currentPage]="page()"
+        (currentPageChange)="navigateToPage($event)"
+        [totalPages]="totalPages"
+    ></app-page-selector>
 </section>

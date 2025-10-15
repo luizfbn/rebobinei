@@ -1,0 +1,24 @@
+<form [formGroup]="selectForm" class="relative w-fit hover:contrast-75">
+    <select
+        id="page-select"
+        name="page-select"
+        formControlName="select"
+        (change)="onPageChange($event)"
+        class="text-neutral-200 text-sm font-light border-1 rounded-lg py-1 px-2 pr-6 cursor-pointer appearance-none focus:outline-none focus:ring-2 focus:ring-neutral-700 focus:border-neutral-800"
+    >
+        @for (page of totalPagesArray(); track page) {
+        <option [value]="page" class="text-neutral-900">Página {{ page }}</option>
+        }
+    </select>
+    <svg
+        width="20"
+        height="20"
+        viewBox="0 0 20 20"
+        class="fill-neutral-200 absolute right-0 top-1.5 mr-1 pointer-events-none"
+        xmlns="http://www.w3.org/2000/svg"
+    >
+        <path
+            d="M10 12.8332L5 7.83317L6.16667 6.6665L10 10.4998L13.8333 6.6665L15 7.83317L10 12.8332Z"
+        />
+    </svg>
+</form>
