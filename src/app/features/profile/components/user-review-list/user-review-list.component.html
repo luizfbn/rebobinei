@@ -1,0 +1,21 @@
+<ul class="max-w-250 m-auto mb-12 *:mb-4">
+    @for(review of reviews.data; track review.id) {
+    <li>
+        <app-user-review [review]="review"></app-user-review>
+    </li>
+    } @if (reviews.totalResults === 0) {
+    <li>
+        <p class="text-neutral-400 text-lg font-normal text-center p-3">
+            Este usuário ainda não fez avaliações.
+        </p>
+    </li>
+    }
+</ul>
+@if (reviews.totalPages > 1) {
+<app-page-selector
+    class="flex justify-center"
+    [currentPage]="page()"
+    (currentPageChange)="navigateToPage($event)"
+    [totalPages]="reviews.totalPages"
+></app-page-selector>
+}
