@@ -5,16 +5,18 @@
         Configurações
     </h1>
     <div
-        class="grid grid-rows-2 gap-10 px-5 sm:grid-rows-1 sm:grid-cols-[max-content_1fr] sm:gap-20"
+        class="grid grid-rows-[max-content_1fr] gap-10 px-5 sm:grid-rows-1 sm:grid-cols-[max-content_1fr] sm:gap-20"
     >
         <nav
-            class="flex flex-col gap-3 text-neutral-400 tracking-wide uppercase sm:w-fit *:hover:text-neutral-200"
+            class="flex flex-col gap-3 text-neutral-400 font-normal tracking-wide uppercase sm:w-fit *:hover:text-neutral-200"
         >
-            <a routerLink="">Sua conta</a>
-            <a routerLink="">Senha</a>
+            <a routerLink="account" routerLinkActive="text-neutral-200 font-semibold">Sua conta</a>
+            <a routerLink="" routerLinkActive="text-neutral-200 font-semibold">Senha</a>
             <span class="block h-[1px] rounded-lg bg-neutral-700 w-full"></span>
-            <a routerLink="">Excluir conta</a>
+            <a routerLink="" routerLinkActive="text-neutral-200 font-semibold">Excluir conta</a>
         </nav>
-        <div></div>
+        <div>
+            <router-outlet></router-outlet>
+        </div>
     </div>
 </section>

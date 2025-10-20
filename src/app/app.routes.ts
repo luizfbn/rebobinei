@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { SearchPageComponent } from './features/search/pages/search-page/search-page.component';
 import { ProfilePageComponent } from './features/profile/pages/profile-page/profile-page.component';
 import { SettingsPageComponent } from './features/settings/pages/settings-page/settings-page.component';
+import { AccountSettingsPageComponent } from './features/settings/pages/account-settings-page/account-settings-page.component';
 
 export const routes: Routes = [
     {
@@ -15,5 +16,9 @@ export const routes: Routes = [
     {
         path: 'settings',
         component: SettingsPageComponent,
+        children: [
+            { path: '', redirectTo: 'account', pathMatch: 'full' },
+            { path: 'account', component: AccountSettingsPageComponent },
+        ],
     },
 ];
