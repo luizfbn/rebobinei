@@ -19,8 +19,6 @@
         <div class="text-xs font-normal text-rose-400">
             @if (password?.hasError('required')) {
             <p>Informe a senha.</p>
-            } @else if (password?.hasError('minlength')) {
-            <p>A senha deve conter pelo menos 6 caracteres.</p>
             }
         </div>
         }
