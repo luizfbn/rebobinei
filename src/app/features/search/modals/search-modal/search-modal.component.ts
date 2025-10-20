@@ -1,12 +1,7 @@
 import { Component, ElementRef, ViewChild, inject, output } from '@angular/core';
-import {
-    FormControl,
-    FormGroup,
-    ReactiveFormsModule,
-    ValidationErrors,
-    Validators,
-} from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ModalRef } from '../../../../shared/modal/modal-ref';
+import { noWhitespaceValidator } from '../../../../shared/validators/no-whitespace.validator';
 
 @Component({
     selector: 'app-search-modal',
@@ -23,7 +18,7 @@ export class SearchModalComponent {
     onClose = output<void>();
 
     searchForm = new FormGroup({
-        searchInput: new FormControl('', [Validators.required, this.noWhitespaceValidator]),
+        searchInput: new FormControl('', [Validators.required, noWhitespaceValidator]),
     });
 
     @ViewChild('searchInput')
@@ -36,10 +31,5 @@ export class SearchModalComponent {
     submit() {
         console.log('Search:', this.searchForm.value.searchInput);
         this.modalRef.close();
-    }
-
-    noWhitespaceValidator(control: FormControl<string>): ValidationErrors | null {
-        const isWhitespace = (control.value || '').trim().length === 0;
-        return isWhitespace ? { whitespace: true } : null;
     }
 }

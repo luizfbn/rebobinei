@@ -1,12 +1,8 @@
 import { Component, output } from '@angular/core';
-import {
-    FormControl,
-    FormGroup,
-    ReactiveFormsModule,
-    ValidationErrors,
-    Validators,
-} from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RestrictSpacesDirective } from '../../../../shared/directives/restrict-spaces.directive';
+import { noWhitespaceValidator } from '../../../../shared/validators/no-whitespace.validator';
+import { noSpecialCharactersValidator } from '../../../../shared/validators/no-special-characters.validator';
 
 @Component({
     selector: 'app-register-form',
@@ -21,13 +17,13 @@ export class RegisterFormComponent {
         name: new FormControl('', [
             Validators.required,
             Validators.minLength(3),
-            this.noWhitespaceValidator,
+            noWhitespaceValidator,
         ]),
         username: new FormControl('', [
             Validators.required,
             Validators.minLength(3),
-            this.noWhitespaceValidator,
-            this.noSpecialCharacters,
+            noWhitespaceValidator,
+            noSpecialCharactersValidator,
         ]),
         email: new FormControl('', [Validators.required, Validators.email]),
         password: new FormControl('', [Validators.required, Validators.minLength(6)]),
@@ -47,17 +43,6 @@ export class RegisterFormComponent {
 
     get password() {
         return this.registerForm.get('password');
-    }
-
-    noWhitespaceValidator(control: FormControl<string>): ValidationErrors | null {
-        const isWhitespace = (control.value || '').trim().length === 0;
-        return isWhitespace ? { whitespace: true } : null;
-    }
-
-    noSpecialCharacters(control: FormControl<string>): ValidationErrors | null {
-        const usernameRegex = /^[a-zA-Z0-9_]+$/;
-        const hasSpecialCharacteres = !usernameRegex.test(control.value);
-        return hasSpecialCharacteres ? { specialcharacters: true } : null;
     }
 
     onSubmit() {
