@@ -4,6 +4,7 @@
     (mousedown)="onOverlayMouseDown($event)"
 >
     <div class="contents" (click)="$event.stopPropagation()">
+        <ng-content></ng-content>
         <ng-container #contentHost></ng-container>
     </div>
 </div>

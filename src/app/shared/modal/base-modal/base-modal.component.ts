@@ -1,4 +1,13 @@
-import { Component, Injector, output, Type, ViewChild, ViewContainerRef } from '@angular/core';
+import {
+    AfterViewInit,
+    Component,
+    Injector,
+    input,
+    output,
+    Type,
+    ViewChild,
+    ViewContainerRef,
+} from '@angular/core';
 
 @Component({
     selector: 'app-base-modal',
@@ -6,12 +15,23 @@ import { Component, Injector, output, Type, ViewChild, ViewContainerRef } from '
     templateUrl: './base-modal.component.html',
     styleUrl: './base-modal.component.css',
 })
-export class BaseModalComponent {
+export class BaseModalComponent implements AfterViewInit {
     onClose = output<void>();
+    contentComponent = input<Type<unknown>>();
+    contentInjector = input<Injector>();
     isMouseDownOnOverlay = false;
 
     @ViewChild('contentHost', { read: ViewContainerRef, static: true })
     contentHost!: ViewContainerRef;
+
+    ngAfterViewInit() {
+        const component = this.contentComponent();
+        const injector = this.contentInjector();
+
+        if (component && injector) {
+            this.loadComponent(component, injector);
+        }
+    }
 
     loadComponent(componentType: Type<unknown>, injector: Injector) {
         this.contentHost.clear();
