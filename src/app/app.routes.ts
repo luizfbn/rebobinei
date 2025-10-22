@@ -4,6 +4,7 @@ import { ProfilePageComponent } from './features/profile/pages/profile-page/prof
 import { SettingsPageComponent } from './features/settings/pages/settings-page/settings-page.component';
 import { AccountSettingsPageComponent } from './features/settings/pages/account-settings-page/account-settings-page.component';
 import { PasswordSettingsPageComponent } from './features/settings/pages/password-settings-page/password-settings-page.component';
+import { DeleteAccountModalComponent } from './features/settings/modals/delete-account-modal/delete-account-modal.component';
 
 export const routes: Routes = [
     {
@@ -22,5 +23,10 @@ export const routes: Routes = [
             { path: 'account', component: AccountSettingsPageComponent },
             { path: 'password', component: PasswordSettingsPageComponent },
         ],
+    },
+    {
+        path: 'settings/delete',
+        component: DeleteAccountModalComponent,
+        outlet: 'modal',
     },
 ];

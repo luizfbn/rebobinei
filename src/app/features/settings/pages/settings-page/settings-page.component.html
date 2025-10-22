@@ -13,7 +13,11 @@
             <a routerLink="account" routerLinkActive="text-neutral-200 font-semibold">Sua conta</a>
             <a routerLink="password" routerLinkActive="text-neutral-200 font-semibold">Senha</a>
             <span class="block h-[1px] rounded-lg bg-neutral-700 w-full"></span>
-            <a routerLink="" routerLinkActive="text-neutral-200 font-semibold">Excluir conta</a>
+            <a
+                [routerLink]="['/', { outlets: { modal: ['settings', 'delete'] } }]"
+                routerLinkActive="text-neutral-200 font-semibold"
+                >Excluir conta</a
+            >
         </nav>
         <div>
             <router-outlet></router-outlet>
