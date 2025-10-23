@@ -1,7 +1,7 @@
 <ul class="max-w-250 m-auto mb-12 *:mb-4">
     @for(review of reviews.data; track review.id) {
     <li>
-        <app-user-review [review]="review"></app-user-review>
+        <app-user-review-item [review]="review"></app-user-review-item>
     </li>
     } @if (reviews.totalResults === 0) {
     <li>

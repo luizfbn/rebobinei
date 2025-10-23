@@ -18,11 +18,11 @@ interface UserReview {
 }
 
 @Component({
-    selector: 'app-user-review',
+    selector: 'app-user-review-item',
     imports: [RatingComponent, DatePipe],
-    templateUrl: './user-review.component.html',
-    styleUrl: './user-review.component.css',
+    templateUrl: './user-review-item.component.html',
+    styleUrl: './user-review-item.component.css',
 })
-export class UserReviewComponent {
+export class UserReviewItemComponent {
     review = input.required<UserReview>();
 }

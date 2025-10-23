@@ -1,11 +1,11 @@
 import { Component, effect, inject, input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { UserReviewComponent } from '../user-review/user-review.component';
+import { UserReviewItemComponent } from '../user-review-item/user-review-item.component';
 import { PageSelectorComponent } from '../../../../shared/components/page-selector/page-selector.component';
 
 @Component({
     selector: 'app-user-review-list',
-    imports: [UserReviewComponent, PageSelectorComponent],
+    imports: [UserReviewItemComponent, PageSelectorComponent],
     templateUrl: './user-review-list.component.html',
     styleUrl: './user-review-list.component.css',
 })
