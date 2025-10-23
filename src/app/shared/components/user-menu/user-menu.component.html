@@ -1,4 +1,4 @@
-<div class="relative" (mouseenter)="setDropdownOpen(true)" (mouseleave)="setDropdownOpen(false)">
+<div class="relative" (mouseenter)="dropdownOpen.set(true)" (mouseleave)="dropdownOpen.set(false)">
     <div class="grid grid-flow-col grid-rows-2 gap-x-1 cursor-pointer p-2 max-w-50 min-w-20">
         <h4
             class="text-neutral-200 text-sm font-bold whitespace-nowrap overflow-hidden text-ellipsis"
@@ -22,7 +22,7 @@
             />
         </svg>
     </div>
-    @if (dropdownOpen) {
+    @if (dropdownOpen()) {
     <ul
         class="bg-neutral-900 rounded-lg text-neutral-400 font-normal text-sm p-4 shadow-[0_0px_8px_2px] shadow-neutral-700/25 min-w-fit w-full absolute right-0 divide-y divide-neutral-700 *:py-3 *:first:pt-0 *:last:pb-0 *:hover:text-neutral-200 *:cursor-pointer"
     >

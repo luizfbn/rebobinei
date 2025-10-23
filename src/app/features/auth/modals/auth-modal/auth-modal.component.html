@@ -31,7 +31,7 @@
             />
         </svg>
     </div>
-    @switch (view) { @case ('login') {
+    @switch (view()) { @case ('login') {
     <h2 class="text-neutral-200 font-semibold text-xl uppercase tracking-wide mb-10">Login</h2>
     <app-login-form (loginSubmit)="onLogin($event)" class="w-full"></app-login-form>
     <span class="block max-w-20 w-full h-[1px] my-7 rounded-lg bg-neutral-700"></span>
@@ -40,7 +40,7 @@
         <button
             type="button"
             class="hover:underline hover:underline-offset-4 text-rose-500 cursor-pointer"
-            (click)="setView('register')"
+            (click)="view.set('register')"
         >
             Crie uma conta
         </button>
@@ -56,7 +56,7 @@
         <button
             type="button"
             class="hover:underline hover:underline-offset-4 text-rose-500 cursor-pointer"
-            (click)="setView('login')"
+            (click)="view.set('login')"
         >
             Entre aqui
         </button>
