@@ -11,11 +11,18 @@
 </div>
 }
 <ng-template #cardContent>
-    <img class="w-50 h-72 rounded-lg" [src]="imageUrl()" [alt]="title()" />
-    <div>
-        <h3 class="text-neutral-200 text-sm font-bold">{{ title() }}</h3>
+    <div #contentWrapper>
+        <ng-content></ng-content>
+    </div>
+
+    <div [style.max-width.px]="contentWidth()">
+        <h3 class="text-neutral-200 text-sm font-bold break-words">
+            {{ title() }}
+        </h3>
         @if (subtitle()) {
-        <p class="text-neutral-200 text-xs font-light">{{ subtitle() }}</p>
+        <p class="text-neutral-200 text-xs font-light break-words">
+            {{ subtitle() }}
+        </p>
         }
     </div>
 </ng-template>

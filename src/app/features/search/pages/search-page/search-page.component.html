@@ -8,12 +8,13 @@
         class="px-10 mb-12 mx-auto grid grid-cols-[repeat(auto-fit,200px)] lg:justify-start justify-center max-w-306 gap-x-9 gap-y-10"
     >
         <li>
-            <app-media-card
-                imageUrl="https://media.themoviedb.org/t/p/w300_and_h450_bestv2/xeZ8oG6W60fEPf9yCjERUXiHRBF.jpg"
-                title="Superman"
-                subtitle="2025"
-                [routerLink]="['/movies', 123]"
-            ></app-media-card>
+            <app-media-card title="Superman" subtitle="2025" [routerLink]="['/movies', 123]">
+                <img
+                    class="w-50 h-72 aspect-[7/10] rounded-lg"
+                    src="https://media.themoviedb.org/t/p/w300_and_h450_bestv2/xeZ8oG6W60fEPf9yCjERUXiHRBF.jpg"
+                    alt="Superman"
+                />
+            </app-media-card>
         </li>
     </ul>
     <app-page-selector

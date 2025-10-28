@@ -1,5 +1,5 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { Component, input } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, input, signal, ViewChild } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
 @Component({
@@ -8,10 +8,15 @@ import { RouterLink } from '@angular/router';
     templateUrl: './media-card.component.html',
     styleUrl: './media-card.component.css',
 })
-export class MediaCardComponent {
-    imageUrl = input.required<string>();
+export class MediaCardComponent implements AfterViewInit {
     title = input.required<string>();
     subtitle = input<string>();
-
     routerLink = input<string | any[] | null>();
+
+    @ViewChild('contentWrapper') contentWrapper!: ElementRef<HTMLDivElement>;
+    contentWidth = signal(0);
+
+    ngAfterViewInit() {
+        this.contentWidth.set(this.contentWrapper.nativeElement.offsetWidth);
+    }
 }
