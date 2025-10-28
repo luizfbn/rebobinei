@@ -1,10 +1,11 @@
 import { Component, input, signal } from '@angular/core';
 import { MovieDetailsComponent } from '../../components/movie-details/movie-details.component';
 import { MovieDetails } from '../../models/movie-details.model';
+import { CastMembersComponent } from '../../components/cast-members/cast-members.component';
 
 @Component({
     selector: 'app-movie-page',
-    imports: [MovieDetailsComponent],
+    imports: [MovieDetailsComponent, CastMembersComponent],
     templateUrl: './movie-page.component.html',
     styleUrl: './movie-page.component.css',
 })

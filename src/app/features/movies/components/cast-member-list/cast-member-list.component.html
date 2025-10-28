@@ -1,0 +1,21 @@
+<ul class="overflow-x-auto pb-4 flex gap-4 sm:gap-8 *:shrink-0 scrollbar">
+    @for (member of cast(); track $index) {
+    <li>
+        <app-media-card [title]="member.name" [subtitle]="member.character">
+            @if(member.profileUrl) {
+            <img
+                class="w-28 h-40 aspect-[7/10] rounded-lg"
+                [src]="member.profileUrl"
+                [alt]="member.name"
+            />
+            } @else {
+            <div
+                class="w-28 h-40 aspect-[7/10] rounded-lg flex place-items-center border-2 border-neutral-700 bg-neutral-900"
+            >
+                <p class="text-neutral-400 w-full text-center p-1">Sem conteúdo</p>
+            </div>
+            }
+        </app-media-card>
+    </li>
+    }
+</ul>
