@@ -1,14 +1,50 @@
-import { Component, input, signal } from '@angular/core';
+import { Component, forwardRef, model, signal } from '@angular/core';
 import { Rating } from '../../enums/rating.enum';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
     selector: 'app-rating',
     imports: [],
     templateUrl: './rating.component.html',
     styleUrl: './rating.component.css',
+    providers: [
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => RatingComponent),
+            multi: true,
+        },
+    ],
 })
-export class RatingComponent {
-    rating = input.required<number>();
+export class RatingComponent implements ControlValueAccessor {
+    rating = model(0);
+    disabled = model(false);
+
     ratingCount = Object.values(Rating).filter((v) => typeof v === 'number').length;
     items = signal(Array.from({ length: this.ratingCount }, (_, k) => k + 1));
+
+    setRating(value: number) {
+        if (this.disabled()) return;
+        this.rating.set(value);
+        this.onChange(this.rating());
+        this.onTouched();
+    }
+
+    private onChange = (value: number) => {};
+    private onTouched = () => {};
+
+    writeValue(value: number) {
+        this.rating.set(value ?? 0);
+    }
+
+    registerOnChange(fn: (value: number) => void) {
+        this.onChange = fn;
+    }
+
+    registerOnTouched(fn: () => void) {
+        this.onTouched = fn;
+    }
+
+    setDisabledState(isDisabled: boolean) {
+        this.disabled.set(isDisabled);
+    }
 }

@@ -1,6 +1,6 @@
 <div class="bg-neutral-700 text-neutral-200 rounded-lg p-4 flex flex-col w-full">
     <div class="flex justify-between flex-col sm:flex-row">
-        <app-rating [rating]="review().rating"></app-rating>
+        <app-rating [rating]="review().rating" [disabled]="true"></app-rating>
         <h6 class="text-neutral-400 text-md font-normal">
             {{ review().createdAt | date : 'dd/MM/yyyy' }}
         </h6>

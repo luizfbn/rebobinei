@@ -2,10 +2,12 @@
     @for(item of items(); track $index) {
     <svg
         class="w-5 h-5"
+        [class.cursor-pointer]="!disabled()"
         width="12"
         height="12"
         viewBox="0 0 12 12"
-        [attr.fill]="item <= rating() ? '#DA0037' : '#444444'"
+        [attr.fill]="item <= rating() ? '#DA0037' : 'transparent'"
+        (click)="setRating(item)"
         xmlns="http://www.w3.org/2000/svg"
     >
         <path
