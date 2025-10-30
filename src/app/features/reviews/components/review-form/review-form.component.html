@@ -1,1 +1,36 @@
-<p>review-form works!</p>
+<form [formGroup]="reviewForm" (ngSubmit)="onSubmit()">
+    <div class="w-full mb-2">
+        <app-rating formControlName="rating"></app-rating>
+        @if (rating?.invalid && rating?.touched) {
+        <div class="text-xs font-normal text-rose-400">
+            @if (rating?.hasError('min')) {
+            <p>Dê uma nota.</p>
+            }
+        </div>
+        }
+    </div>
+    <div class="w-full mb-1">
+        <textarea
+            id="comment"
+            class="input w-full resize-none"
+            type="text"
+            formControlName="comment"
+            rows="3"
+            maxlength="1000"
+            minlength="1"
+            placeholder="Sua avaliação"
+        ></textarea>
+        @if (comment?.invalid && comment?.touched) {
+        <div class="text-xs font-normal text-rose-400">
+            @if (comment?.hasError('maxlength')) {
+            <p>O comentário pode ter até 1000 caracteres.</p>
+            } @else if (comment?.hasError('whitespace')) {
+            <p>Informe um comentário válido.</p>
+            }
+        </div>
+        }
+    </div>
+    <button class="btn float-end" type="submit" title="Avaliar" [disabled]="reviewForm.invalid">
+        Avaliar
+    </button>
+</form>
