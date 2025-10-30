@@ -14,9 +14,15 @@ export class PageSelectorComponent implements OnInit {
     selectForm!: FormGroup<{ select: FormControl<number | null> }>;
 
     ngOnInit() {
+        this.ensureValidCurrentPage();
         this.selectForm = new FormGroup({
             select: new FormControl(this.currentPage()),
         });
+    }
+
+    ensureValidCurrentPage() {
+        if (this.currentPage() <= this.totalPages()) return;
+        this.currentPage.set(this.totalPages());
     }
 
     onPageChange(event: Event) {
