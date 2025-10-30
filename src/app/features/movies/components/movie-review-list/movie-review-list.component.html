@@ -1,0 +1,13 @@
+<ul class="max-w-250 m-auto mb-8 *:mb-4">
+    @for (review of reviews().data; track $index) {
+    <li><app-movie-review-item [review]="review"></app-movie-review-item></li>
+    }
+</ul>
+@if (reviews().totalPages > 1) {
+<app-page-selector
+    class="flex justify-center"
+    [currentPage]="page()"
+    (currentPageChange)="navigateToPage($event)"
+    [totalPages]="reviews().totalPages"
+></app-page-selector>
+}
