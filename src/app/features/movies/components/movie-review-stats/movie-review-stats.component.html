@@ -1,0 +1,35 @@
+<div class="grid grid-flow-col grid-rows-2 gap-x-2 content-center mb-2">
+    <h5 class="text-5xl text-rose-600 font-bold tracking-wide row-span-2">
+        {{ stats().average }}
+    </h5>
+    <app-rating [rating]="stats().average" [disabled]="true"></app-rating>
+    <p class="text-sm text-neutral-400 font-normal">{{ stats().totalCount }} avaliações</p>
+</div>
+<ol class="*:mb-1">
+    @for (item of items(); track $index) {
+    <li class="flex items-center gap-1">
+        <div
+            class="inline-block h-1 w-full bg-neutral-400 rounded-lg mr-1 relative"
+            [title]="stats().counts[item] + ' avaliações'"
+        >
+            <span
+                class="absolute inset-0 bg-rose-600 rounded-lg"
+                [style.width.%]="(stats().counts[item] / stats().totalCount) * 100"
+            ></span>
+        </div>
+        <span class="text-neutral-200 font-bold text-xs">{{ item }}</span>
+        <svg
+            class="w-3 h-3"
+            width="12"
+            height="12"
+            viewBox="0 0 12 12"
+            fill="#DA0037"
+            xmlns="http://www.w3.org/2000/svg"
+        >
+            <path
+                d="M6 9.46647L3.20834 11.1498C3.09167 11.222 2.97084 11.2526 2.84584 11.2415C2.72084 11.2304 2.61111 11.1887 2.51667 11.1165C2.42222 11.0442 2.35 10.9526 2.3 10.8415C2.25 10.7304 2.24167 10.6081 2.275 10.4748L3.01667 7.2998L0.550003 5.16647C0.444447 5.07203 0.37778 4.96508 0.350003 4.84564C0.322225 4.72619 0.32778 4.61092 0.366669 4.4998C0.405558 4.38869 0.470836 4.29425 0.562503 4.21647C0.654169 4.13869 0.769447 4.09147 0.908336 4.0748L4.15834 3.79147L5.425 0.799805C5.48056 0.672027 5.56111 0.577582 5.66667 0.516471C5.77222 0.45536 5.88334 0.424805 6 0.424805C6.11667 0.424805 6.22778 0.45536 6.33334 0.516471C6.43889 0.577582 6.51945 0.672027 6.575 0.799805L7.84167 3.79147L11.0917 4.0748C11.2306 4.09147 11.3458 4.13869 11.4375 4.21647C11.5292 4.29425 11.5944 4.38869 11.6333 4.4998C11.6722 4.61092 11.6778 4.72619 11.65 4.84564C11.6222 4.96508 11.5556 5.07203 11.45 5.16647L8.98334 7.2998L9.725 10.4748C9.75834 10.6081 9.75 10.7304 9.7 10.8415C9.65 10.9526 9.57778 11.0442 9.48334 11.1165C9.38889 11.1887 9.27917 11.2304 9.15417 11.2415C9.02917 11.2526 8.90834 11.222 8.79167 11.1498L6 9.46647Z"
+            />
+        </svg>
+    </li>
+    }
+</ol>
