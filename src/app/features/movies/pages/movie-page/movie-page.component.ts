@@ -2,16 +2,24 @@ import { Component, input, signal } from '@angular/core';
 import { MovieDetailsComponent } from '../../components/movie-details/movie-details.component';
 import { MovieDetails } from '../../models/movie-details.model';
 import { CastMembersComponent } from '../../components/cast-members/cast-members.component';
+import { MovieReviewsComponent } from '../../components/movie-reviews/movie-reviews.component';
+import { ReviewStats } from '../../../reviews/models/review-stats';
 
 @Component({
     selector: 'app-movie-page',
-    imports: [MovieDetailsComponent, CastMembersComponent],
+    imports: [MovieDetailsComponent, CastMembersComponent, MovieReviewsComponent],
     templateUrl: './movie-page.component.html',
     styleUrl: './movie-page.component.css',
 })
 export class MoviePageComponent {
     movieId = input.required<string>({
         alias: 'id',
+    });
+    page = input.required({
+        transform: (page: number | undefined) => {
+            const pg = Number(page);
+            return pg && pg > 0 ? pg : 1;
+        },
     });
 
     movie = signal<MovieDetails>({
@@ -91,5 +99,17 @@ export class MoviePageComponent {
                 profileUrl: 'https://image.tmdb.org/t/p/w500/vs6aMdkXkR8A0sOCXK6AGIrVeHb.jpg',
             },
         ],
+    });
+
+    reviewStats = signal<ReviewStats>({
+        average: 4.6,
+        totalCount: 3,
+        counts: {
+            1: 0,
+            2: 0,
+            3: 0,
+            4: 1,
+            5: 2,
+        },
     });
 }

@@ -1,0 +1,27 @@
+<section class="mb-7 mx-5">
+    <div class="flex items-center mb-6">
+        <h3 class="text-neutral-200 font-semibold text-xl tracking-wide uppercase pr-2 sm:text-2xl">
+            Avaliações
+        </h3>
+        <span class="block flex-1 h-[1px] rounded-lg bg-neutral-700 max-w-20"></span>
+    </div>
+    <article class="grid grid-flow-row gap-10 md:grid-cols-2 md:gap-20">
+        <div class="flex flex-col items-center gap-5">
+            <app-review-form (reviewSubmit)="onReview($event)" class="w-full"></app-review-form>
+            <span class="block h-[1px] rounded-lg bg-neutral-700 w-20"></span>
+            <app-movie-review-list
+                [movieId]="movieId()"
+                [page]="page()"
+                class="w-full"
+            ></app-movie-review-list>
+        </div>
+        <div
+            class="order-first justify-self-center md:justify-self-start md:order-last md:relative"
+        >
+            <app-movie-review-stats
+                class="md:sticky md:inset-25"
+                [stats]="reviewStats()"
+            ></app-movie-review-stats>
+        </div>
+    </article>
+</section>

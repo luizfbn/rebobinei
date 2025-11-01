@@ -1,4 +1,12 @@
 <section class="container">
-    <app-movie-details [movie]="movie()"></app-movie-details>
+    <app-movie-details
+        [movie]="movie()"
+        [averageRating]="reviewStats().average"
+    ></app-movie-details>
     <app-cast-members [cast]="movie().cast"></app-cast-members>
+    <app-movie-reviews
+        [movieId]="movieId()"
+        [page]="page()"
+        [reviewStats]="reviewStats()"
+    ></app-movie-reviews>
 </section>

@@ -11,4 +11,5 @@ import { MinutesToHoursPipe } from '../../../../shared/pipes/minutes-to-hours.pi
 })
 export class MovieDetailsComponent {
     movie = input.required<MovieDetails>();
+    averageRating = input<number>();
 }
