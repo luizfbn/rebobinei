@@ -1,4 +1,4 @@
-import { Rating } from '../enums/rating.enum';
+import { Rating } from './rating.model';
 
 export interface ReviewDetails {
     id: string;

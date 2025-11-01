@@ -2,6 +2,8 @@ import { Component, effect, inject, input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserReviewItemComponent } from '../user-review-item/user-review-item.component';
 import { PageSelectorComponent } from '../../../../shared/components/page-selector/page-selector.component';
+import { Pagination } from '../../../../shared/models/pagination.model';
+import { ReviewWithMovie } from '../../../reviews/models/review-with-movie.model';
 
 @Component({
     selector: 'app-user-review-list',
@@ -23,7 +25,7 @@ export class UserReviewListComponent {
         data: [
             {
                 id: '123',
-                rating: 4.5,
+                rating: 4,
                 comment: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
             incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur
             adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna.`,
@@ -40,7 +42,7 @@ export class UserReviewListComponent {
                 },
             },
         ],
-    };
+    } as Pagination<ReviewWithMovie>;
 
     constructor() {
         effect(() => {

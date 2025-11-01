@@ -1,5 +1,5 @@
 import { Component, forwardRef, model, signal } from '@angular/core';
-import { Rating } from '../../enums/rating.enum';
+import { RATINGS } from '../../models/rating.model';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
@@ -18,9 +18,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 export class RatingComponent implements ControlValueAccessor {
     rating = model(0);
     disabled = model(false);
-
-    ratingCount = Object.values(Rating).filter((v) => typeof v === 'number').length;
-    items = signal(Array.from({ length: this.ratingCount }, (_, k) => k + 1));
+    items = signal([...RATINGS]);
 
     setRating(value: number) {
         if (this.disabled()) return;

@@ -1,9 +1,7 @@
-import { Rating } from '../enums/rating.enum';
+import { Rating } from './rating.model';
 
 export interface ReviewStats {
     average: number;
     totalCount: number;
-    counts: {
-        [key in Rating]: number;
-    };
+    counts: Record<Rating, number>;
 }
