@@ -1,11 +1,12 @@
 import { Component, input } from '@angular/core';
 import { DatePipe } from '@angular/common';
+import { RouterLink } from '@angular/router';
 import { RatingComponent } from '../../../reviews/components/rating/rating.component';
 import { ReviewWithMovie } from '../../../reviews/models/review-with-movie.model';
 
 @Component({
     selector: 'app-user-review-item',
-    imports: [RatingComponent, DatePipe],
+    imports: [RatingComponent, DatePipe, RouterLink],
     templateUrl: './user-review-item.component.html',
     styleUrl: './user-review-item.component.css',
 })

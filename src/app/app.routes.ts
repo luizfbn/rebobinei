@@ -6,11 +6,17 @@ import { SettingsPageComponent } from './features/settings/pages/settings-page/s
 import { AccountSettingsPageComponent } from './features/settings/pages/account-settings-page/account-settings-page.component';
 import { PasswordSettingsPageComponent } from './features/settings/pages/password-settings-page/password-settings-page.component';
 import { DeleteAccountModalComponent } from './features/settings/modals/delete-account-modal/delete-account-modal.component';
+import { ReviewDetailModalComponent } from './features/reviews/modals/review-detail-modal/review-detail-modal.component';
 
 export const routes: Routes = [
     {
         path: 'movie/:id',
         component: MoviePageComponent,
+    },
+    {
+        path: 'review/:id',
+        component: ReviewDetailModalComponent,
+        outlet: 'modal',
     },
     {
         path: 'search',

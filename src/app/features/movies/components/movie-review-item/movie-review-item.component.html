@@ -1,4 +1,7 @@
-<div class="bg-neutral-700 text-neutral-200 rounded-lg p-4 flex flex-col w-full">
+<a
+    class="bg-neutral-700 text-neutral-200 rounded-lg p-4 flex flex-col w-full"
+    [routerLink]="['/', { outlets: { modal: ['review', review().id] } }]"
+>
     <div class="flex justify-between flex-col sm:flex-row">
         <app-rating [rating]="review().rating" [disabled]="true"></app-rating>
         <h6 class="text-neutral-400 text-md font-normal">
@@ -13,5 +16,7 @@
     <p class="text-md font-normal">
         {{ review().comment }}
     </p>
+    } @else {
+    <p class="text-md font-normal text-neutral-400">Nenhum comentário realizado.</p>
     }
-</div>
+</a>

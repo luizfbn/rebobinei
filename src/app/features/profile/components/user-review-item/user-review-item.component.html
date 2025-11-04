@@ -1,12 +1,13 @@
-<div
+<a
     class="bg-neutral-700 text-neutral-200 rounded-lg p-3 flex gap-3 flex-col items-center sm:flex-row sm:items-start"
+    [routerLink]="['/', { outlets: { modal: ['review', review().id] } }]"
 >
     <img
         class="w-35 h-50 aspect-[7/10] rounded-lg"
         [src]="review().movie.posterUrl"
         [alt]="review().movie.title"
     />
-    <div class="flex flex-col">
+    <div class="flex flex-col flex-1">
         <div class="flex justify-between flex-col-reverse sm:flex-row">
             <h4 class="text-xl font-bold uppercase tracking-wide">{{ review().movie.title }}</h4>
             <h5 class="text-neutral-400 text-md font-normal">
@@ -14,8 +15,12 @@
             </h5>
         </div>
         <app-rating [rating]="review().rating" [disabled]="true"></app-rating>
+        @if(review().comment) {
         <p class="text-md font-normal mt-4">
             {{ review().comment }}
         </p>
+        } @else {
+        <p class="text-md font-normal mt-4 text-neutral-400">Nenhum comentário realizado.</p>
+        }
     </div>
-</div>
+</a>
