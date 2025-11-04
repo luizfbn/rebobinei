@@ -1,0 +1,37 @@
+<div>
+    <div class="text-neutral-200 flex gap-3 flex-col items-center mb-4 sm:flex-row">
+        <img
+            class="w-28 h-40 aspect-[7/10] rounded-lg"
+            [src]="review().movie.posterUrl"
+            [alt]="review().movie.title"
+        />
+        <div class="flex flex-col self-start">
+            <h4 class="text-xl font-bold uppercase tracking-wide">{{ review().movie.title }}</h4>
+            <h5 class="text-neutral-400 uppercase text-sm font-normal mb-4">
+                {{ review().movie.originalTitle }}
+            </h5>
+            <p class="text-md font-normal">
+                {{ review().movie.overview }}
+            </p>
+        </div>
+    </div>
+    <div class="bg-neutral-700 text-neutral-200 rounded-lg p-4 flex flex-col w-full">
+        <div class="flex justify-between flex-col sm:flex-row">
+            <app-rating [rating]="review().rating" [disabled]="true"></app-rating>
+            <h6 class="text-neutral-400 text-md font-normal">
+                {{ review().createdAt | date : 'dd/MM/yyyy' }}
+            </h6>
+        </div>
+        <div class="flex gap-x-1 flex-wrap items-center mb-2">
+            <h4 class="text-xl font-bold">{{ review().author.name }}</h4>
+            <h5 class="text-neutral-400 text-md font-normal">@{{ review().author.username }}</h5>
+        </div>
+        @if(review().comment) {
+        <p class="text-md font-normal">
+            {{ review().comment }}
+        </p>
+        } @else {
+        <p class="text-md font-normal text-neutral-400">Nenhum comentário realizado.</p>
+        }
+    </div>
+</div>
