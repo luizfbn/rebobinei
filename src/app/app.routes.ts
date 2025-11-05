@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { HomePageComponent } from './features/home/pages/home-page/home-page.component';
 import { MoviePageComponent } from './features/movies/pages/movie-page/movie-page.component';
 import { SearchPageComponent } from './features/search/pages/search-page/search-page.component';
 import { ProfilePageComponent } from './features/profile/pages/profile-page/profile-page.component';
@@ -9,6 +10,10 @@ import { DeleteAccountModalComponent } from './features/settings/modals/delete-a
 import { ReviewDetailModalComponent } from './features/reviews/modals/review-detail-modal/review-detail-modal.component';
 
 export const routes: Routes = [
+    {
+        path: '',
+        component: HomePageComponent,
+    },
     {
         path: 'movie/:id',
         component: MoviePageComponent,
