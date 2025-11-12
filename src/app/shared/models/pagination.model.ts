@@ -4,3 +4,8 @@ export interface Pagination<T> {
     totalResults: number;
     data: T[];
 }
+
+export interface PaginationQueryParams {
+    page?: number;
+    limit?: number;
+}
