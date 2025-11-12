@@ -1,9 +1,10 @@
 import { Component, input, signal } from '@angular/core';
 import { MovieDetailsComponent } from '../../components/movie-details/movie-details.component';
-import { MovieDetails } from '../../models/movie-details.model';
 import { CastMembersComponent } from '../../components/cast-members/cast-members.component';
 import { MovieReviewsComponent } from '../../components/movie-reviews/movie-reviews.component';
+import { MovieDetails } from '../../models/movie-details.model';
 import { ReviewStats } from '../../../reviews/models/review-stats';
+import { pageTransform } from '../../../../shared/utils/transformers';
 
 @Component({
     selector: 'app-movie-page',
@@ -16,10 +17,7 @@ export class MoviePageComponent {
         alias: 'id',
     });
     page = input.required({
-        transform: (page: number | undefined) => {
-            const pg = Number(page);
-            return pg && pg > 0 ? pg : 1;
-        },
+        transform: pageTransform,
     });
 
     movie = signal<MovieDetails>({

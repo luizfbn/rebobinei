@@ -1,5 +1,6 @@
 import { Component, input } from '@angular/core';
 import { UserReviewListComponent } from '../../components/user-review-list/user-review-list.component';
+import { pageTransform } from '../../../../shared/utils/transformers';
 
 @Component({
     selector: 'app-profile-page',
@@ -12,6 +13,6 @@ export class ProfilePageComponent {
         alias: 'id',
     });
     page = input.required({
-        transform: (page: number | undefined) => Number(page) ?? 1,
+        transform: pageTransform,
     });
 }

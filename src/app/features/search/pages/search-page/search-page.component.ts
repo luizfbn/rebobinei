@@ -1,7 +1,8 @@
 import { Component, effect, inject, input } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MediaCardComponent } from '../../../../shared/components/media-card/media-card.component';
 import { PageSelectorComponent } from '../../../../shared/components/page-selector/page-selector.component';
-import { ActivatedRoute, Router } from '@angular/router';
+import { pageTransform } from '../../../../shared/utils/transformers';
 
 @Component({
     selector: 'app-search-page',
@@ -15,7 +16,7 @@ export class SearchPageComponent {
 
     query = input<string>();
     page = input.required({
-        transform: (page: number | undefined) => Number(page) ?? 1,
+        transform: pageTransform,
     });
 
     totalPages = 5;
