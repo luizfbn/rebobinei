@@ -1,0 +1,58 @@
+<section class="relative py-10 px-5 mb-7">
+    <img
+        class="absolute inset-0 size-full object-cover brightness-40 -z-10 fade-borders"
+        [src]="activeMovie().backdropUrl"
+        alt=""
+    />
+    <div class="mt-15 md:mt-30 mb-20 h-60">
+        <h1
+            class="max-w-4xl text-neutral-200 font-bold text-2xl tracking-wide uppercase mb-4 line-clamp-2 text-balance sm:text-5xl"
+        >
+            {{ activeMovie().title }}
+        </h1>
+        <h2 class="max-w-2xl text-neutral-200 font-normal text-lg mb-5 line-clamp-4 md:text-xl">
+            {{ activeMovie().overview }}
+        </h2>
+        <button
+            class="btn"
+            type="button"
+            title="Saiba mais"
+            routerLink="/movies/{{ activeMovie().tmdbId }}"
+        >
+            Saiba mais
+        </button>
+    </div>
+
+    <div>
+        <h3
+            class="text-neutral-200 font-semibold text-xl tracking-wide uppercase pr-2 mb-6 sm:text-2xl"
+        >
+            Filmes populares
+        </h3>
+        <ul
+            class="overflow-x-auto py-4 px-2 mx-5 flex gap-4 sm:gap-8 *:shrink-0 scrollbar scroll-smooth"
+        >
+            @for(movie of movies().data; track $index){
+            <li>
+                <a
+                    routerLink="/movies/{{ movie.tmdbId }}"
+                    class="flex flex-col gap-2 w-fit cursor-pointer rounded-lg grayscale outline-none ring-rose-500 border-rose-600 transition-all hover:scale-105 hover:ring-2 hover:grayscale-0 focus:scale-105 focus:ring-2 focus:grayscale-0"
+                    [class.grayscale-0]="activeMovie() === movie"
+                    [class.ring-2]="activeMovie() === movie"
+                    [class.scale-105]="activeMovie() === movie"
+                    (mouseenter)="activeMovie.set(movie); pauseAutoPlay()"
+                    (focus)="activeMovie.set(movie); pauseAutoPlay()"
+                    (blur)="resumeAutoPlay()"
+                    (mouseleave)="resumeAutoPlay()"
+                >
+                    <img
+                        class="w-28 h-40 md:w-42 md:h-60 aspect-[7/10] rounded-lg"
+                        [src]="movie.posterUrl"
+                        [alt]="movie.title"
+                    />
+                </a>
+            </li>
+            }
+        </ul>
+    </div>
+</section>
