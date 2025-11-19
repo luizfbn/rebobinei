@@ -1,0 +1,62 @@
+<section class="relative py-10 px-5">
+    <div class="flex items-center mb-6">
+        <h3 class="text-neutral-200 font-semibold text-xl tracking-wide uppercase pr-2 sm:text-2xl">
+            Tendências
+        </h3>
+        <span class="block flex-1 h-[1px] rounded-lg bg-neutral-700 max-w-20"></span>
+    </div>
+    <ul class="flex flex-wrap justify-center gap-4 sm:gap-8 mb-12">
+        @for (movie of movies().data; track $index) { @if ($index < 5) {
+        <li>
+            <app-media-card
+                [title]="movie.title"
+                subtitle="{{ movie.releaseDate | date : 'yyyy' }}"
+                [routerLink]="['/movies', movie.tmdbId]"
+            >
+                <img
+                    class="w-50 h-72 aspect-[7/10] rounded-lg"
+                    [src]="movie.posterUrl"
+                    [alt]="movie.title"
+                />
+            </app-media-card>
+        </li>
+        } }
+    </ul>
+    @if (movies().data[5]) { @let movie = movies().data[5];
+    <div
+        class="relative flex flex-col justify-between py-4 px-8 mx-auto transition-all size-full max-w-200"
+    >
+        <img
+            class="absolute inset-0 size-full object-cover brightness-80 -z-10"
+            [src]="movie.backdropUrl"
+            alt=""
+        />
+        <div
+            class="absolute inset-0 bg-gradient-to-r -z-10 from-neutral-900 via-transparent to-transparent"
+        ></div>
+        <div
+            class="absolute inset-0 bg-gradient-to-l -z-10 from-neutral-900 via-transparent to-transparent"
+        ></div>
+        <h6 class="text-md font-normal text-neutral-200 mb-6">
+            {{ movie.releaseDate | date : 'yyyy' }}
+        </h6>
+        <div class="max-w-100 mb-6">
+            <h5 class="text-2xl font-bold tracking-wide uppercase text-neutral-200 mb-1">
+                {{ movie.title }}
+            </h5>
+            <p class="text-md font-normal text-neutral-200 line-clamp-4">
+                {{ movie.overview }}
+            </p>
+        </div>
+
+        <button
+            class="btn self-end"
+            type="button"
+            title="Saiba mais"
+            [routerLink]="['/movies', movie.tmdbId]"
+        >
+            Saiba mais
+        </button>
+    </div>
+    }
+</section>
