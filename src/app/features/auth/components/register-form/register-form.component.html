@@ -8,6 +8,8 @@
             <p>Informe o nome.</p>
             } @else if (name?.hasError('minlength')) {
             <p>O nome deve conter pelo menos 3 caracteres.</p>
+            } @else if (name?.hasError('maxlength')) {
+            <p>O nome deve conter no máximo 50 caracteres.</p>
             } @else if (name?.hasError('whitespace')) {
             <p>Informe um nome válido.</p>
             }
@@ -29,6 +31,8 @@
             <p>Informe o nome de usuário.</p>
             } @else if (username?.hasError('minlength')) {
             <p>O nome de usuário deve conter pelo menos 3 caracteres.</p>
+            } @else if (username?.hasError('maxlength')) {
+            <p>O nome de usuário deve conter no máximo 30 caracteres.</p>
             } @else if (username?.hasError('whitespace')) {
             <p>Informe um nome de usuário válido.</p>
             } @else if (username?.hasError('specialcharacters')) {
@@ -61,11 +65,18 @@
             <p>Informe a senha.</p>
             } @else if (password?.hasError('minlength')) {
             <p>A senha deve conter pelo menos 6 caracteres.</p>
+            } @else if (password?.hasError('maxlength')) {
+            <p>A senha deve conter no máximo 64 caracteres.</p>
             }
         </div>
         }
     </div>
-    <button class="btn w-full" type="submit" title="Cadastrar" [disabled]="registerForm.invalid">
-        Cadastrar
+    <button
+        class="btn w-full"
+        type="submit"
+        title="Cadastrar"
+        [disabled]="registerForm.invalid || isLoading()"
+    >
+        {{ isLoading() ? 'Carregando...' : 'Cadastrar' }}
     </button>
 </form>

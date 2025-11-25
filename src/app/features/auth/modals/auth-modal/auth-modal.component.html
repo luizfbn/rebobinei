@@ -33,7 +33,11 @@
     </div>
     @switch (view()) { @case ('login') {
     <h2 class="text-neutral-200 font-semibold text-xl uppercase tracking-wide mb-10">Login</h2>
-    <app-login-form (loginSubmit)="onLogin($event)" class="w-full"></app-login-form>
+    <app-login-form
+        (loginSubmit)="onLogin($event)"
+        class="w-full"
+        [isLoading]="loading()"
+    ></app-login-form>
     <span class="block max-w-20 w-full h-[1px] my-7 rounded-lg bg-neutral-700"></span>
     <p class="text-sm text-neutral-400">
         Não tem uma conta?
@@ -49,7 +53,11 @@
     <h2 class="text-neutral-200 font-semibold text-xl uppercase tracking-wide mb-10">
         Criar conta
     </h2>
-    <app-register-form (registerSubmit)="onRegister($event)" class="w-full"></app-register-form>
+    <app-register-form
+        (registerSubmit)="onRegister($event)"
+        class="w-full"
+        [isLoading]="loading()"
+    ></app-register-form>
     <span class="block max-w-20 w-full h-[1px] my-7 rounded-lg bg-neutral-700"></span>
     <p class="text-sm text-neutral-400">
         Já tem uma conta?

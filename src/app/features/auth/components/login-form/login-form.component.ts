@@ -1,5 +1,6 @@
-import { Component, output } from '@angular/core';
+import { Component, input, output, effect } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { LoginForm } from '../../models/login-form.model';
 
 @Component({
     selector: 'app-login-form',
@@ -8,12 +9,23 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
     styleUrl: './login-form.component.css',
 })
 export class LoginFormComponent {
-    loginSubmit = output<typeof this.loginForm.value>();
+    isLoading = input<boolean>(false);
+    loginSubmit = output<LoginForm>();
 
     loginForm = new FormGroup({
-        email: new FormControl('', [Validators.required, Validators.email]),
-        password: new FormControl('', [Validators.required]),
+        email: new FormControl('', {
+            validators: [Validators.required, Validators.email],
+        }),
+        password: new FormControl('', {
+            validators: [Validators.required],
+        }),
     });
+
+    constructor() {
+        effect(() => {
+            this.isLoading() ? this.loginForm.disable() : this.loginForm.enable();
+        });
+    }
 
     get email() {
         return this.loginForm.get('email');
@@ -25,7 +37,7 @@ export class LoginFormComponent {
 
     onSubmit() {
         if (this.loginForm.valid) {
-            this.loginSubmit.emit(this.loginForm.value);
+            this.loginSubmit.emit(this.loginForm.value as LoginForm);
         }
     }
 }

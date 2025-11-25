@@ -23,7 +23,12 @@
         </div>
         }
     </div>
-    <button class="btn w-full" type="submit" title="Entrar" [disabled]="loginForm.invalid">
-        Entrar
+    <button
+        class="btn w-full"
+        type="submit"
+        title="Entrar"
+        [disabled]="loginForm.invalid || isLoading()"
+    >
+        {{ isLoading() ? 'Carregando...' : 'Entrar' }}
     </button>
 </form>

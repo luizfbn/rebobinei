@@ -1,7 +1,8 @@
-import { Component, inject, ViewChild, ViewContainerRef } from '@angular/core';
+import { Component, computed, inject, ViewChild, ViewContainerRef } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { SearchModalService } from '../../features/search/modals/search-modal/search-modal.service';
 import { AuthModalService } from '../../features/auth/modals/auth-modal/auth-modal.service';
+import { AuthService } from '../../core/auth/services/auth.service';
 import { UserMenuComponent } from '../../shared/components/user-menu/user-menu.component';
 import { SearchTriggerComponent } from '../../features/search/components/search-trigger/search-trigger.component';
 
@@ -12,9 +13,12 @@ import { SearchTriggerComponent } from '../../features/search/components/search-
     styleUrl: './header.component.css',
 })
 export class HeaderComponent {
-    isLoggedIn = true;
+    authService = inject(AuthService);
     searchModalService = inject(SearchModalService);
     authModalService = inject(AuthModalService);
+
+    user = computed(() => this.authService.currentUser());
+    isAuthenticated = computed(() => this.authService.isAuthenticated());
 
     @ViewChild('searchModal', { read: ViewContainerRef })
     searchModalContainer!: ViewContainerRef;
