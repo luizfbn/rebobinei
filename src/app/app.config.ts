@@ -1,18 +1,22 @@
 import {
     ApplicationConfig,
+    ErrorHandler,
     provideBrowserGlobalErrorListeners,
     provideZoneChangeDetection,
 } from '@angular/core';
 import { provideRouter, withComponentInputBinding } from '@angular/router';
 import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
 import { routes } from './app.routes';
+import { errorInterceptor } from './core/error/interceptors/error.interceptor';
 import { authInterceptor } from './core/auth/interceptors/auth.interceptor';
+import { GlobalErrorHandler } from './core/error/global-error-handler';
 
 export const appConfig: ApplicationConfig = {
     providers: [
         provideBrowserGlobalErrorListeners(),
         provideZoneChangeDetection({ eventCoalescing: true }),
         provideRouter(routes, withComponentInputBinding()),
-        provideHttpClient(withFetch(), withInterceptors([authInterceptor])),
+        provideHttpClient(withFetch(), withInterceptors([authInterceptor, errorInterceptor])),
+        { provide: ErrorHandler, useClass: GlobalErrorHandler },
     ],
 };

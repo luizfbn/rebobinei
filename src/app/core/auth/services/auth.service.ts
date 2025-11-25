@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
-import { switchMap, tap } from 'rxjs';
+import { catchError, of, switchMap, tap } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { User } from '../../user/models/user.model';
 
@@ -27,10 +27,8 @@ export class AuthService {
 
     loadUser() {
         return this.http.get<User>(`${this.baseUrl}/me`).pipe(
-            tap({
-                next: (user) => this.currentUser.set(user),
-                error: () => this.currentUser.set(null),
-            })
+            catchError(() => of(null)),
+            tap((user) => this.currentUser.set(user))
         );
     }
 
