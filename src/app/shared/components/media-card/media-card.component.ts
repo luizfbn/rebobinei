@@ -10,7 +10,7 @@ import { RouterLink } from '@angular/router';
 })
 export class MediaCardComponent implements AfterViewInit {
     title = input.required<string>();
-    subtitle = input<string>();
+    subtitle = input<string | null>();
     routerLink = input<string | any[] | null>();
 
     @ViewChild('contentWrapper') contentWrapper!: ElementRef<HTMLDivElement>;
