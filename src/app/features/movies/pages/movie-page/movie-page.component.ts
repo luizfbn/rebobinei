@@ -1,9 +1,9 @@
-import { Component, input, signal } from '@angular/core';
+import { Component, input, numberAttribute } from '@angular/core';
 import { MovieDetailsComponent } from '../../components/movie-details/movie-details.component';
 import { CastMembersComponent } from '../../components/cast-members/cast-members.component';
 import { MovieReviewsComponent } from '../../components/movie-reviews/movie-reviews.component';
-import { MovieDetails } from '../../models/movie-details.model';
-import { ReviewStats } from '../../../reviews/models/review-stats';
+import { MovieDetails } from '../../../../core/movie/models/movie-details.model';
+import { ReviewStats } from '../../../../core/review/models/review-stats.model';
 import { pageTransform } from '../../../../shared/utils/transformers';
 
 @Component({
@@ -13,101 +13,14 @@ import { pageTransform } from '../../../../shared/utils/transformers';
     styleUrl: './movie-page.component.css',
 })
 export class MoviePageComponent {
-    movieId = input.required<string>({
+    movieId = input.required({
         alias: 'id',
+        transform: numberAttribute,
     });
     page = input.required({
         transform: pageTransform,
     });
 
-    movie = signal<MovieDetails>({
-        tmdbId: 1061474,
-        title: 'Superman',
-        originalTitle: 'Superman',
-        overview:
-            'Superman, um jovem repórter de Metrópolis, embarca em uma jornada para reconciliar sua herança kryptoniana com sua criação humana como Clark Kent.',
-        releaseDate: '2025-07-09T00:00:00.000Z',
-        posterUrl: 'https://image.tmdb.org/t/p/w500/xeZ8oG6W60fEPf9yCjERUXiHRBF.jpg',
-        backdropUrl: 'https://image.tmdb.org/t/p/original/eGX66zonvc4bXg3rM08RUxdYSDx.jpg',
-        runtime: 128,
-        budget: 225000000,
-        revenue: 615800000,
-        certification: '14',
-        genres: ['Ficção científica', 'Aventura', 'Ação'],
-        directors: ['James Gunn'],
-        cast: [
-            {
-                tmdbId: 1785590,
-                name: 'David Corenswet',
-                character: 'Superman',
-                profileUrl: 'https://image.tmdb.org/t/p/w500/qB0hBMu4wU1nPrqtdUQP3sQeN5t.jpg',
-            },
-            {
-                tmdbId: 993774,
-                name: 'Rachel Brosnahan',
-                character: 'Lois Lane',
-                profileUrl: 'https://image.tmdb.org/t/p/w500/1f9NK43gWrXN2uMmYMlennB7jCC.jpg',
-            },
-            {
-                tmdbId: 3292,
-                name: 'Nicholas Hoult',
-                character: 'Lex Luthor',
-                profileUrl: 'https://image.tmdb.org/t/p/w500/laeAYQVBV9U3DkJ1B4Cn1XhpT8P.jpg',
-            },
-            {
-                tmdbId: 39391,
-                name: 'Edi Gathegi',
-                character: 'Mr. Terrific',
-                profileUrl: 'https://image.tmdb.org/t/p/w500/dt8yMyycDlzxkjhmuuJJ4tXDbp4.jpg',
-            },
-            {
-                tmdbId: 51797,
-                name: 'Nathan Fillion',
-                character: 'Guy Gardner',
-                profileUrl: 'https://image.tmdb.org/t/p/w500/q31mXXgnN5PsuIjEqaaAPvBDvHc.jpg',
-            },
-            {
-                tmdbId: 1428070,
-                name: 'Isabela Merced',
-                character: 'Hawkgirl',
-                profileUrl: 'https://image.tmdb.org/t/p/w500/5R1oi4PH7GXWETJS8SbSo673gJt.jpg',
-            },
-            {
-                tmdbId: 1601451,
-                name: 'María Gabriela de Faría',
-                character: 'The Engineer',
-                profileUrl: 'https://image.tmdb.org/t/p/w500/joKXt8ai99udROK7VEFCDsBEm3Y.jpg',
-            },
-            {
-                tmdbId: 61263,
-                name: 'Skyler Gisondo',
-                character: 'Jimmy Olsen',
-                profileUrl: 'https://image.tmdb.org/t/p/w500/vyalCuJUUP7Ht1vMWZQzhOrscXV.jpg',
-            },
-            {
-                tmdbId: 21088,
-                name: 'Alan Tudyk',
-                character: 'Gary',
-                profileUrl: 'https://image.tmdb.org/t/p/w500/jUuUbPuMGonFT5E2pcs4alfqaCN.jpg',
-            },
-            {
-                tmdbId: 5441666,
-                name: 'Grace Chan',
-                character: 'Superman Robot #12 (voice)',
-                profileUrl: 'https://image.tmdb.org/t/p/w500/vs6aMdkXkR8A0sOCXK6AGIrVeHb.jpg',
-            },
-        ],
-    });
-
-    reviewStats = signal<ReviewStats>({
-        average: 4.6,
-        totalCount: 3,
-        counts: {
-            1: 0,
-            2: 0,
-            3: 0,
-            4: 1,
-            5: 2,
-        },
-    });
+    movie = input.required<MovieDetails>();
+    reviewStats = input.required<ReviewStats>();
 }

@@ -1,9 +1,8 @@
-import { Component, inject, input, signal } from '@angular/core';
-import { MovieReviewItemComponent } from '../movie-review-item/movie-review-item.component';
-import { Pagination } from '../../../../shared/models/pagination.model';
-import { ReviewWithAuthor } from '../../../reviews/models/review-with-author.model';
-import { PageSelectorComponent } from '../../../../shared/components/page-selector/page-selector.component';
+import { Component, effect, inject, input, signal } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { MovieReviewItemComponent } from '../movie-review-item/movie-review-item.component';
+import { PageSelectorComponent } from '../../../../shared/components/page-selector/page-selector.component';
+import { MovieStateService } from '../../services/movie-state.service';
 
 @Component({
     selector: 'app-movie-review-list',
@@ -12,51 +11,27 @@ import { ActivatedRoute, Router } from '@angular/router';
     styleUrl: './movie-review-list.component.css',
 })
 export class MovieReviewListComponent {
+    movieStateService = inject(MovieStateService);
     router = inject(Router);
     route = inject(ActivatedRoute);
-    movieId = input.required<string>();
-    page = input.required<number>();
 
-    reviews = signal<Pagination<ReviewWithAuthor>>({
-        page: 1,
-        totalPages: 2,
-        totalResults: 2,
-        data: [
-            {
-                id: '1',
-                rating: 4,
-                comment: 'Bla bla',
-                createdAt: '2025-07-09T00:00:00.000Z',
-                author: {
-                    id: '123',
-                    name: 'Sandro Jorge',
-                    username: 'lilsandro',
+    movieId = input.required<number>();
+    page = input.required<number>();
+    skeletonCount = Array.from({ length: 3 });
+    loading = signal(false);
+
+    constructor() {
+        effect(() => {
+            this.loading.set(true);
+            this.movieStateService.loadReviews(this.movieId()).subscribe({
+                error: (err) => {
+                    this.loading.set(false);
+                    console.log(err);
                 },
-            },
-            {
-                id: '2',
-                rating: 5,
-                comment: 'Bla bla 2',
-                createdAt: '2025-07-09T00:00:00.000Z',
-                author: {
-                    id: '124',
-                    name: 'Jorge Jorge',
-                    username: 'jjorge',
-                },
-            },
-            {
-                id: '3',
-                rating: 5,
-                comment: 'Bla bla 3',
-                createdAt: '2025-07-09T00:00:00.000Z',
-                author: {
-                    id: '125',
-                    name: 'Sandro Sandro',
-                    username: 'ssandro',
-                },
-            },
-        ],
-    });
+                complete: () => this.loading.set(false),
+            });
+        });
+    }
 
     navigateToPage(newPage: number) {
         this.router.navigate([], {

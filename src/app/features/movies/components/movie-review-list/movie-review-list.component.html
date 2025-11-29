@@ -1,13 +1,19 @@
 <ul class="max-w-250 m-auto mb-8 *:mb-4">
-    @for (review of reviews().data; track $index) {
+    @if (loading()) { @for (n of skeletonCount; track $index) {
+    <li class="bg-neutral-800 animate-pulse rounded-lg w-full h-20"></li>
+    } } @else { @for (review of movieStateService.reviews().data; track $index) {
     <li><app-movie-review-item [review]="review"></app-movie-review-item></li>
-    }
+    } @empty {
+    <li class="col-span-full">
+        <p class="text-neutral-400 text-lg font-normal text-center p-3">Nenhuma avaliação feita.</p>
+    </li>
+    } }
 </ul>
-@if (reviews().totalPages > 1) {
+@if (movieStateService.reviews().totalPages > 1) {
 <app-page-selector
     class="flex justify-center"
     [currentPage]="page()"
     (currentPageChange)="navigateToPage($event)"
-    [totalPages]="reviews().totalPages"
+    [totalPages]="movieStateService.reviews().totalPages"
 ></app-page-selector>
 }

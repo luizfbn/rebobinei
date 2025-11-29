@@ -22,9 +22,9 @@ export class ReviewService {
         return this.http.get<ReviewDetails>(`${this.baseUrl}/reviews/${id}`).pipe(retry(2));
     }
 
-    getByUserAndMovie(userId: string, movieId: string) {
+    getByUserAndMovie(userId: string, movieId: number) {
         return this.http
-            .get<ReviewDetails>(`${this.baseUrl}/reviews/by-user-and-movie`, {
+            .get<ReviewDetails | null>(`${this.baseUrl}/reviews/by-user-and-movie`, {
                 params: { userId, movieId },
             })
             .pipe(retry(2));

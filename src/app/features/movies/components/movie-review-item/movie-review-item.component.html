@@ -9,11 +9,11 @@
         </h6>
     </div>
     <div class="flex gap-x-1 flex-wrap items-center mb-2">
-        <h4 class="text-xl font-bold">{{ review().author.name }}</h4>
+        <h4 class="text-xl font-bold line-clamp-1">{{ review().author.name }}</h4>
         <h5 class="text-neutral-400 text-md font-normal">@{{ review().author.username }}</h5>
     </div>
     @if(review().comment) {
-    <p class="text-md font-normal">
+    <p class="text-md font-normal line-clamp-3">
         {{ review().comment }}
     </p>
     } @else {

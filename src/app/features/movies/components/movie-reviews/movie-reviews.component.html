@@ -7,8 +7,24 @@
     </div>
     <article class="grid grid-flow-row gap-10 md:grid-cols-2 md:gap-20">
         <div class="flex flex-col items-center gap-5">
-            <app-review-form (reviewSubmit)="onReview($event)" class="w-full"></app-review-form>
+            @if(authService.currentUser()) { @if(loading()) {
+            <div class="bg-neutral-800 animate-pulse rounded-lg w-full h-30"></div>
+            } @else if (userReview()){
+            <div class="max-w-250 w-full m-auto">
+                <p class="text-lg font-semibold tracking-wide text-neutral-200 uppercase mb-2">
+                    Minha avaliação
+                </p>
+                <app-movie-review-item [review]="userReview()!"></app-movie-review-item>
+            </div>
+            } @else {
+            <app-review-form
+                (reviewSubmit)="onReview($event)"
+                [isLoading]="submittingReview()"
+                class="w-full"
+            ></app-review-form>
+            }
             <span class="block h-[1px] rounded-lg bg-neutral-700 w-20"></span>
+            }
             <app-movie-review-list
                 [movieId]="movieId()"
                 [page]="page()"
@@ -18,10 +34,12 @@
         <div
             class="order-first justify-self-center md:justify-self-start md:order-last md:relative"
         >
+            @if (movieStateService.stats()?.totalCount) {
             <app-movie-review-stats
                 class="md:sticky md:inset-25"
-                [stats]="reviewStats()"
+                [stats]="movieStateService.stats()!"
             ></app-movie-review-stats>
+            }
         </div>
     </article>
 </section>

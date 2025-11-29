@@ -1,6 +1,6 @@
-import { Component, input } from '@angular/core';
-import { CastMember } from '../../models/cast-member.model';
+import { Component, inject } from '@angular/core';
 import { CastMemberListComponent } from '../cast-member-list/cast-member-list.component';
+import { MovieStateService } from '../../services/movie-state.service';
 
 @Component({
     selector: 'app-cast-members',
@@ -9,5 +9,5 @@ import { CastMemberListComponent } from '../cast-member-list/cast-member-list.co
     styleUrl: './cast-members.component.css',
 })
 export class CastMembersComponent {
-    cast = input.required<CastMember[]>();
+    movieStateService = inject(MovieStateService);
 }

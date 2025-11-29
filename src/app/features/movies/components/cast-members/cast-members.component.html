@@ -5,5 +5,5 @@
         </h3>
         <span class="block flex-1 h-[1px] rounded-lg bg-neutral-700 max-w-20"></span>
     </div>
-    <app-cast-member-list [cast]="cast()"></app-cast-member-list>
+    <app-cast-member-list [cast]="movieStateService.movie()?.cast"></app-cast-member-list>
 </section>

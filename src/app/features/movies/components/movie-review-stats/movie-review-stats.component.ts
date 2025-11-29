@@ -1,7 +1,7 @@
 import { Component, input, signal } from '@angular/core';
-import { ReviewStats } from '../../../reviews/models/review-stats';
 import { RatingComponent } from '../../../reviews/components/rating/rating.component';
-import { RATINGS } from '../../../reviews/models/rating.model';
+import { ReviewStats } from '../../../../core/review/models/review-stats.model';
+import { RATINGS } from '../../../../core/review/models/rating.model';
 
 @Component({
     selector: 'app-movie-review-stats',

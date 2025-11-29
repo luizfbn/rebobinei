@@ -1,10 +1,10 @@
 import { Component, effect, inject, input, signal } from '@angular/core';
 import { DatePipe } from '@angular/common';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MediaCardComponent } from '../../../../shared/components/media-card/media-card.component';
 import { PageSelectorComponent } from '../../../../shared/components/page-selector/page-selector.component';
-import { ActivatedRoute, Router } from '@angular/router';
+import { MovieListItem } from '../../../../core/movie/models/movie-list-item.model';
 import { MovieService } from '../../../../core/movie/services/movie.service';
-import { MovieListItem } from '../../../movies/models/movie-list-item.model';
 
 @Component({
     selector: 'app-search-list',
