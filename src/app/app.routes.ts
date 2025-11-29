@@ -8,6 +8,8 @@ import { AccountSettingsPageComponent } from './features/settings/pages/account-
 import { PasswordSettingsPageComponent } from './features/settings/pages/password-settings-page/password-settings-page.component';
 import { DeleteAccountModalComponent } from './features/settings/modals/delete-account-modal/delete-account-modal.component';
 import { ReviewDetailModalComponent } from './features/reviews/modals/review-detail-modal/review-detail-modal.component';
+import { movieDetailsResolver } from './features/movies/resolvers/movie-details.resolver';
+import { movieStatsResolver } from './features/movies/resolvers/movie-stats.resolver';
 
 export const routes: Routes = [
     {
@@ -15,11 +17,15 @@ export const routes: Routes = [
         component: HomePageComponent,
     },
     {
-        path: 'movie/:id',
+        path: 'movies/:id',
         component: MoviePageComponent,
+        resolve: {
+            movie: movieDetailsResolver,
+            reviewStats: movieStatsResolver,
+        },
     },
     {
-        path: 'review/:id',
+        path: 'reviews/:id',
         component: ReviewDetailModalComponent,
         outlet: 'modal',
     },
@@ -45,4 +51,5 @@ export const routes: Routes = [
         component: DeleteAccountModalComponent,
         outlet: 'modal',
     },
+    { path: '**', component: HomePageComponent },
 ];
