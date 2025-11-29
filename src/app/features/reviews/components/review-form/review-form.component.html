@@ -23,14 +23,19 @@
         @if (comment?.invalid && comment?.touched) {
         <div class="text-xs font-normal text-rose-400">
             @if (comment?.hasError('maxlength')) {
-            <p>O comentário pode ter até 1000 caracteres.</p>
+            <p>O comentário pode ter até 2000 caracteres.</p>
             } @else if (comment?.hasError('whitespace')) {
             <p>Informe um comentário válido.</p>
             }
         </div>
         }
     </div>
-    <button class="btn float-end" type="submit" title="Avaliar" [disabled]="reviewForm.invalid">
-        Avaliar
+    <button
+        class="btn float-end"
+        type="submit"
+        title="Avaliar"
+        [disabled]="reviewForm.invalid || isLoading()"
+    >
+        {{ isLoading() ? 'Carregando...' : 'Avaliar' }}
     </button>
 </form>
