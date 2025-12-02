@@ -48,4 +48,8 @@ export class MovieService {
     addReview(...args: Parameters<ReviewService['create']>) {
         return this.reviewService.create(...args);
     }
+
+    deleteReview(...args: Parameters<ReviewService['delete']>) {
+        return this.reviewService.delete(...args);
+    }
 }

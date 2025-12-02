@@ -2,7 +2,14 @@
     @if (loading()) { @for (n of skeletonCount; track $index) {
     <li class="bg-neutral-800 animate-pulse rounded-lg w-full h-20"></li>
     } } @else { @for (review of movieStateService.reviews().data; track $index) {
-    <li><app-movie-review-item [review]="review"></app-movie-review-item></li>
+    <li>
+        <app-movie-review-item
+            [review]="review"
+            [canDelete]="review.author.id === currentUser()?.id"
+            (delete)="onDeleteReview($event)"
+            [isLoading]="deletingReview()"
+        ></app-movie-review-item>
+    </li>
     } @empty {
     <li class="col-span-full">
         <p class="text-neutral-400 text-lg font-normal text-center p-3">Nenhuma avaliação feita.</p>

@@ -14,11 +14,16 @@
                 <p class="text-lg font-semibold tracking-wide text-neutral-200 uppercase mb-2">
                     Minha avaliação
                 </p>
-                <app-movie-review-item [review]="userReview()!"></app-movie-review-item>
+                <app-movie-review-item
+                    [review]="userReview()!"
+                    [isLoading]="submittingReview()"
+                    [canDelete]="true"
+                    (delete)="onDeleteReview($event)"
+                ></app-movie-review-item>
             </div>
             } @else {
             <app-review-form
-                (reviewSubmit)="onReview($event)"
+                (reviewSubmit)="onAddReview($event)"
                 [isLoading]="submittingReview()"
                 class="w-full"
             ></app-review-form>
@@ -28,6 +33,9 @@
             <app-movie-review-list
                 [movieId]="movieId()"
                 [page]="page()"
+                [currentUser]="authService.currentUser()"
+                [deletingReview]="submittingReview()"
+                (delete)="onDeleteReview($event)"
                 class="w-full"
             ></app-movie-review-list>
         </div>

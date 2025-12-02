@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { Component, input, output } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { RatingComponent } from '../../../reviews/components/rating/rating.component';
@@ -12,4 +12,13 @@ import { ReviewWithAuthor } from '../../../reviews/models/review-with-author.mod
 })
 export class MovieReviewItemComponent {
     review = input.required<ReviewWithAuthor>();
+    isLoading = input(false);
+    canDelete = input(false);
+    delete = output<string>();
+
+    onDelete(event: PointerEvent) {
+        event.stopPropagation();
+        event.preventDefault();
+        this.delete.emit(this.review().id);
+    }
 }

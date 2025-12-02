@@ -54,4 +54,15 @@ export class MovieStateService {
             })
         );
     }
+
+    deleteReview(...args: Parameters<MovieService['deleteReview']>) {
+        const movieId = this.movie()?.tmdbId;
+        if (!movieId) return;
+
+        return this.movieService.deleteReview(...args).pipe(
+            switchMap(() => {
+                return forkJoin([this.loadReviews(movieId), this.loadStats(movieId)]);
+            })
+        );
+    }
 }

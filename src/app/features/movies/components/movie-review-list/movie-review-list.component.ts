@@ -1,7 +1,8 @@
-import { Component, effect, inject, input, signal } from '@angular/core';
+import { Component, effect, inject, input, output, signal } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MovieReviewItemComponent } from '../movie-review-item/movie-review-item.component';
 import { PageSelectorComponent } from '../../../../shared/components/page-selector/page-selector.component';
+import { User } from '../../../../core/user/models/user.model';
 import { MovieStateService } from '../../services/movie-state.service';
 
 @Component({
@@ -17,6 +18,10 @@ export class MovieReviewListComponent {
 
     movieId = input.required<number>();
     page = input.required<number>();
+    currentUser = input<User | null>();
+    delete = output<string>();
+    deletingReview = input(false);
+
     skeletonCount = Array.from({ length: 3 });
     loading = signal(false);
 
@@ -31,6 +36,10 @@ export class MovieReviewListComponent {
                 complete: () => this.loading.set(false),
             });
         });
+    }
+
+    onDeleteReview(id: string) {
+        this.delete.emit(id);
     }
 
     navigateToPage(newPage: number) {

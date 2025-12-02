@@ -52,7 +52,7 @@ export class MovieReviewsComponent {
         });
     }
 
-    onReview(payload: ReviewForm) {
+    onAddReview(payload: ReviewForm) {
         this.submittingReview.set(true);
         this.movieStateService
             .addReview(this.movieId(), {
@@ -67,5 +67,17 @@ export class MovieReviewsComponent {
                 },
                 complete: () => this.submittingReview.set(false),
             });
+    }
+
+    onDeleteReview(id: string) {
+        this.submittingReview.set(true);
+        this.movieStateService.deleteReview(id)?.subscribe({
+            next: () => this.userReview.set(null),
+            error: (err) => {
+                this.submittingReview.set(false);
+                console.error(err);
+            },
+            complete: () => this.submittingReview.set(false),
+        });
     }
 }
