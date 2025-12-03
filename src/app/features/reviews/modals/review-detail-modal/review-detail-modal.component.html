@@ -27,6 +27,11 @@
             </h2>
             <span class="block flex-1 h-[1px] rounded-lg bg-neutral-700 max-w-20"></span>
         </div>
-        <app-review-details [review]="review()!"></app-review-details>
+        <app-review-details
+            [review]="review()"
+            [isLoading]="deletingReview()"
+            [canDelete]="review().author.id === authService.currentUser()?.id"
+            (delete)="onDeleteReview($event)"
+        ></app-review-details>
     </section>
 </app-base-modal>

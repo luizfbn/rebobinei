@@ -32,6 +32,16 @@
         </p>
         } @else {
         <p class="text-md font-normal text-neutral-400">Nenhum comentário realizado.</p>
+        } @if (canDelete()) {
+        <button
+            class="text-rose-600 font-normal text-sm cursor-pointer underline-offset-1 self-end z-1 hover:underline"
+            type="button"
+            title="Excluir"
+            (click)="onDelete()"
+            [disabled]="isLoading()"
+        >
+            {{ isLoading() ? 'Excluindo...' : 'Excluir' }}
+        </button>
         }
     </div>
 </div>

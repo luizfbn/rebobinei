@@ -1,8 +1,10 @@
 import { Component, inject, input, signal } from '@angular/core';
 import { Router } from '@angular/router';
-import { ReviewDetails } from '../../models/review-details.model';
 import { BaseModalComponent } from '../../../../shared/modal/base-modal/base-modal.component';
 import { ReviewDetailsComponent } from '../../components/review-details/review-details.component';
+import { ReviewDetails } from '../../../../core/review/models/review-details.model';
+import { AuthService } from '../../../../core/auth/services/auth.service';
+import { ReviewContextService } from '../../services/review-context.service';
 
 @Component({
     selector: 'app-review-detail-modal',
@@ -12,33 +14,37 @@ import { ReviewDetailsComponent } from '../../components/review-details/review-d
 })
 export class ReviewDetailModalComponent {
     router = inject(Router);
+    authService = inject(AuthService);
+    reviewContext = inject(ReviewContextService);
 
-    id = input.required<string>();
-    review = signal<ReviewDetails | undefined>({
-        id: '1',
-        rating: 4,
-        comment: 'Bla bla',
-        createdAt: '2025-07-09T00:00:00.000Z',
-        updatedAt: '2025-07-09T00:00:00.000Z',
-        author: {
-            id: '123',
-            name: 'Sandro Jorge',
-            username: 'lilsandro',
-        },
-        movie: {
-            tmdbId: 123,
-            title: 'Superman',
-            originalTitle: 'Superman',
-            overview:
-                'Superman, um jovem repórter de Metrópolis, embarca em uma jornada para reconciliar sua herança kryptoniana com sua criação humana como Clark Kent.',
-            posterUrl:
-                'https://media.themoviedb.org/t/p/w300_and_h450_bestv2/xeZ8oG6W60fEPf9yCjERUXiHRBF.jpg',
-            backdropUrl:
-                'https://media.themoviedb.org/t/p/w300_and_h450_bestv2/xeZ8oG6W60fEPf9yCjERUXiHRBF.jpg',
-        },
+    reviewId = input.required({
+        alias: 'id',
     });
+    review = input.required<ReviewDetails>();
+
+    deletingReview = signal(false);
 
     closeModal() {
         this.router.navigate(['.', { outlets: { modal: null } }]);
+    }
+
+    onDeleteReview(id: string) {
+        const controller = this.reviewContext.getController();
+        if (!controller) {
+            this.closeModal();
+            return;
+        }
+        this.deletingReview.set(true);
+        controller.deleteReview(id)?.subscribe({
+            next: () => {
+                this.deletingReview.set(false);
+                this.reviewContext.notifyDeleteSuccess(id);
+                this.closeModal();
+            },
+            error: (err) => {
+                this.deletingReview.set(false);
+                console.error(err);
+            },
+        });
     }
 }

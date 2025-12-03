@@ -10,6 +10,7 @@ import { DeleteAccountModalComponent } from './features/settings/modals/delete-a
 import { ReviewDetailModalComponent } from './features/reviews/modals/review-detail-modal/review-detail-modal.component';
 import { movieDetailsResolver } from './features/movies/resolvers/movie-details.resolver';
 import { movieStatsResolver } from './features/movies/resolvers/movie-stats.resolver';
+import { reviewDetailsResolver } from './features/reviews/resolvers/review-details.resolver';
 
 export const routes: Routes = [
     {
@@ -28,6 +29,9 @@ export const routes: Routes = [
         path: 'reviews/:id',
         component: ReviewDetailModalComponent,
         outlet: 'modal',
+        resolve: {
+            review: reviewDetailsResolver,
+        },
     },
     {
         path: 'search',

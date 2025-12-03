@@ -1,4 +1,5 @@
 import { Component, effect, inject, input, signal } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MovieReviewListComponent } from '../movie-review-list/movie-review-list.component';
 import { ReviewFormComponent } from '../../../reviews/components/review-form/review-form.component';
 import { MovieReviewStatsComponent } from '../movie-review-stats/movie-review-stats.component';
@@ -8,6 +9,7 @@ import { ReviewForm } from '../../../reviews/models/review-form.model';
 import { AuthService } from '../../../../core/auth/services/auth.service';
 import { ReviewService } from '../../../../core/review/services/review.service';
 import { MovieStateService } from '../../services/movie-state.service';
+import { ReviewContextService } from '../../../reviews/services/review-context.service';
 
 @Component({
     selector: 'app-movie-reviews',
@@ -24,6 +26,7 @@ export class MovieReviewsComponent {
     movieStateService = inject(MovieStateService);
     authService = inject(AuthService);
     reviewService = inject(ReviewService);
+    reviewContext = inject(ReviewContextService);
 
     movieId = input.required<number>();
     page = input.required<number>();
@@ -35,6 +38,12 @@ export class MovieReviewsComponent {
     constructor() {
         effect(() => {
             this.loadUserReview();
+        });
+        this.reviewContext.reviewDeleted$.pipe(takeUntilDestroyed()).subscribe((deletedId) => {
+            const currentReview = this.userReview();
+            if (currentReview && currentReview.id === deletedId) {
+                this.userReview.set(null);
+            }
         });
     }
 
@@ -72,7 +81,10 @@ export class MovieReviewsComponent {
     onDeleteReview(id: string) {
         this.submittingReview.set(true);
         this.movieStateService.deleteReview(id)?.subscribe({
-            next: () => this.userReview.set(null),
+            next: () => {
+                this.userReview.set(null);
+                this.reviewContext.notifyDeleteSuccess(id);
+            },
             error: (err) => {
                 this.submittingReview.set(false);
                 console.error(err);
