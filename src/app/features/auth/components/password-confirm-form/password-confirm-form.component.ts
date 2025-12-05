@@ -23,8 +23,7 @@ export class PasswordConfirmFormComponent {
     }
 
     onSubmit() {
-        if (this.passwordForm.valid) {
-            this.submitPassword.emit(this.passwordForm.value.password!);
-        }
+        if (this.passwordForm.invalid) return;
+        this.submitPassword.emit(this.passwordForm.value.password!);
     }
 }

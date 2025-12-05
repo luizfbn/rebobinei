@@ -36,8 +36,7 @@ export class LoginFormComponent {
     }
 
     onSubmit() {
-        if (this.loginForm.valid) {
-            this.loginSubmit.emit(this.loginForm.value as LoginForm);
-        }
+        if (this.loginForm.invalid) return;
+        this.loginSubmit.emit(this.loginForm.value as LoginForm);
     }
 }

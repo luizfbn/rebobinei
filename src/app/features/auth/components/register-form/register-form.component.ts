@@ -60,8 +60,7 @@ export class RegisterFormComponent {
     }
 
     onSubmit() {
-        if (this.registerForm.valid) {
-            this.registerSubmit.emit(this.registerForm.value as RegisterForm);
-        }
+        if (this.registerForm.invalid) return;
+        this.registerSubmit.emit(this.registerForm.value as RegisterForm);
     }
 }
