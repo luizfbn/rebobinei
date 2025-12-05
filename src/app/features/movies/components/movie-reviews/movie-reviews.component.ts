@@ -4,7 +4,7 @@ import { MovieReviewListComponent } from '../movie-review-list/movie-review-list
 import { ReviewFormComponent } from '../../../reviews/components/review-form/review-form.component';
 import { MovieReviewStatsComponent } from '../movie-review-stats/movie-review-stats.component';
 import { MovieReviewItemComponent } from '../movie-review-item/movie-review-item.component';
-import { ReviewDetails } from '../../../reviews/models/review-details.model';
+import { ReviewDetails } from '../../../../core/review/models/review-details.model';
 import { ReviewForm } from '../../../reviews/models/review-form.model';
 import { AuthService } from '../../../../core/auth/services/auth.service';
 import { ReviewService } from '../../../../core/review/services/review.service';

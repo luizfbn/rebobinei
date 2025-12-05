@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { UserReviewItemComponent } from '../user-review-item/user-review-item.component';
 import { PageSelectorComponent } from '../../../../shared/components/page-selector/page-selector.component';
 import { Pagination } from '../../../../shared/models/pagination.model';
-import { ReviewWithMovie } from '../../../reviews/models/review-with-movie.model';
+import { ReviewWithMovie } from '../../../../core/review/models/review-with-movie.model';
 
 @Component({
     selector: 'app-user-review-list',

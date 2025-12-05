@@ -1,6 +1,6 @@
 import { Component, forwardRef, model, signal } from '@angular/core';
-import { RATINGS } from '../../models/rating.model';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { RATINGS } from '../../../../core/review/models/rating.model';
 
 @Component({
     selector: 'app-rating',
