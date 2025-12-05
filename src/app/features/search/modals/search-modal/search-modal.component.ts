@@ -1,5 +1,6 @@
 import { Component, ElementRef, ViewChild, inject, output } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ModalRef } from '../../../../shared/modal/modal-ref';
 import { noWhitespaceValidator } from '../../../../shared/validators/no-whitespace.validator';
 
@@ -13,7 +14,8 @@ import { noWhitespaceValidator } from '../../../../shared/validators/no-whitespa
     },
 })
 export class SearchModalComponent {
-    modalRef = inject(ModalRef<void>);
+    modalRef = inject(ModalRef<string>);
+    router = inject(Router);
 
     onClose = output<void>();
 
@@ -29,7 +31,9 @@ export class SearchModalComponent {
     }
 
     submit() {
-        console.log('Search:', this.searchForm.value.searchInput);
+        this.router.navigate(['/search'], {
+            queryParams: { q: this.searchForm.value.searchInput },
+        });
         this.modalRef.close();
     }
 }
