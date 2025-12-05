@@ -3,12 +3,12 @@
         <h4
             class="text-neutral-200 text-sm font-bold whitespace-nowrap overflow-hidden text-ellipsis"
         >
-            {{ user().name }}
+            {{ authService.currentUser()?.name }}
         </h4>
         <h5
             class="text-neutral-400 text-xs font-medium whitespace-nowrap overflow-hidden text-ellipsis"
         >
-            @{{ user().username }}
+            @{{ authService.currentUser()?.username }}
         </h5>
         <svg
             class="row-span-2 self-center fill-neutral-400"
@@ -26,7 +26,7 @@
     <ul
         class="bg-neutral-900 rounded-lg text-neutral-400 font-normal text-sm p-4 shadow-[0_0px_8px_2px] shadow-neutral-700/25 min-w-fit w-full absolute right-0 divide-y divide-neutral-700 *:py-3 *:first:pt-0 *:last:pb-0 *:hover:text-neutral-200 *:cursor-pointer"
     >
-        <li><a [routerLink]="['/profile', user().id]">Meu perfil</a></li>
+        <li><a [routerLink]="['/profile', authService.currentUser()?.id]">Meu perfil</a></li>
         <li><a routerLink="settings">Configurações</a></li>
         <li><a (click)="logout()">Sair</a></li>
     </ul>

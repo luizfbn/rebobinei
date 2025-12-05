@@ -17,23 +17,14 @@ export class HeaderComponent {
     searchModalService = inject(SearchModalService);
     authModalService = inject(AuthModalService);
 
-    user = computed(() => this.authService.currentUser());
-    isAuthenticated = computed(() => this.authService.isAuthenticated());
-
     @ViewChild('searchModal', { read: ViewContainerRef })
     searchModalContainer!: ViewContainerRef;
 
     openSearchModal() {
-        const modalRef = this.searchModalService.open(this.searchModalContainer);
-        modalRef.afterClosed.subscribe((result) => {
-            console.log('Search modal closed', result);
-        });
+        this.searchModalService.open(this.searchModalContainer);
     }
 
     openAuthModal() {
-        const modalRef = this.authModalService.open(this.searchModalContainer);
-        modalRef.afterClosed.subscribe((result) => {
-            console.log('Auth modal closed', result);
-        });
+        this.authModalService.open(this.searchModalContainer);
     }
 }

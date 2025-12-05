@@ -10,8 +10,8 @@
             class="w-full max-w-80"
         ></app-search-trigger>
         <span class="block w-[1px] h-9 rounded-lg bg-neutral-700"></span>
-        @if(isAuthenticated()) {
-        <app-user-menu [user]="user()!"></app-user-menu>
+        @if(authService.isAuthenticated()) {
+        <app-user-menu></app-user-menu>
         } @else {
         <button class="btn-outline" type="button" title="Entrar" (click)="openAuthModal()">
             Entrar

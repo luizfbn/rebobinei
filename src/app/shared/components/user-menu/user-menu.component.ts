@@ -1,7 +1,6 @@
-import { Component, inject, input, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { AuthService } from '../../../core/auth/services/auth.service';
-import { User } from '../../../core/user/models/user.model';
 
 @Component({
     selector: 'app-user-menu',
@@ -12,7 +11,6 @@ import { User } from '../../../core/user/models/user.model';
 export class UserMenuComponent {
     authService = inject(AuthService);
 
-    user = input.required<User>();
     dropdownOpen = signal(false);
 
     logout() {
