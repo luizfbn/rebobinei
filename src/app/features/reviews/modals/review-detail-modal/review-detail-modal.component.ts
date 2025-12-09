@@ -1,5 +1,5 @@
 import { Component, inject, input, signal } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { BaseModalComponent } from '../../../../shared/modal/base-modal/base-modal.component';
 import { ReviewDetailsComponent } from '../../components/review-details/review-details.component';
 import { ReviewDetails } from '../../../../core/review/models/review-details.model';
@@ -14,6 +14,7 @@ import { ReviewContextService } from '../../services/review-context.service';
 })
 export class ReviewDetailModalComponent {
     router = inject(Router);
+    route = inject(ActivatedRoute);
     authService = inject(AuthService);
     reviewContext = inject(ReviewContextService);
 
@@ -25,7 +26,7 @@ export class ReviewDetailModalComponent {
     deletingReview = signal(false);
 
     closeModal() {
-        this.router.navigate(['.', { outlets: { modal: null } }]);
+        this.router.navigate(['../../'], { relativeTo: this.route });
     }
 
     onDeleteReview(id: string) {

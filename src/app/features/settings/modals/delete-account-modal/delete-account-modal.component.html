@@ -31,8 +31,8 @@
         <app-delete-confirm-step (confirm)="step.set(2)" (cancel)="closeModal()" />
         } @case (2) {
         <app-password-confirm-form
-            [submitLabel]="'Confirmar exclusão'"
-            [cancelLabel]="'Voltar'"
+            submitLabel="Confirmar exclusão"
+            cancelLabel="Voltar"
             [isLoading]="isDeleting()"
             (cancel)="step.set(1)"
             (submitPassword)="confirmDelete($event)"

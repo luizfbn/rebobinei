@@ -6,7 +6,12 @@
             [alt]="review().movie.title"
         />
         <div class="flex flex-col self-start">
-            <h4 class="text-xl font-bold uppercase tracking-wide">{{ review().movie.title }}</h4>
+            <a
+                class="text-xl font-bold uppercase tracking-wide hover:underline hover:underline-offset-3"
+                [routerLink]="['/movies', review().movie.tmdbId]"
+            >
+                {{ review().movie.title }}
+            </a>
             <h5 class="text-neutral-400 uppercase text-sm font-normal mb-4">
                 {{ review().movie.originalTitle }}
             </h5>
@@ -23,8 +28,16 @@
             </h6>
         </div>
         <div class="flex gap-x-1 flex-wrap items-center mb-2">
-            <h4 class="text-xl font-bold">{{ review().author.name }}</h4>
-            <h5 class="text-neutral-400 text-md font-normal">@{{ review().author.username }}</h5>
+            <a
+                class="text-xl font-bold line-clamp-1 hover:underline hover:underline-offset-3"
+                [routerLink]="['/profile', review().author.id]"
+                >{{ review().author.name }}</a
+            >
+            <a
+                class="text-neutral-400 text-md font-normal"
+                [routerLink]="['/profile', review().author.id]"
+                >@{{ review().author.username }}</a
+            >
         </div>
         @if(review().comment) {
         <p class="text-md font-normal">

@@ -1,6 +1,6 @@
 <a
     class="bg-neutral-700 text-neutral-200 rounded-lg p-4 flex flex-col w-full"
-    [routerLink]="['/', { outlets: { modal: ['reviews', review().id] } }]"
+    [routerLink]="['reviews', review().id]"
 >
     <div class="flex justify-between flex-col sm:flex-row">
         <app-rating [rating]="review().rating" [disabled]="true"></app-rating>
@@ -9,8 +9,16 @@
         </h6>
     </div>
     <div class="flex gap-x-1 flex-wrap items-center mb-2">
-        <h4 class="text-xl font-bold line-clamp-1">{{ review().author.name }}</h4>
-        <h5 class="text-neutral-400 text-md font-normal">@{{ review().author.username }}</h5>
+        <a
+            class="text-xl font-bold line-clamp-1 hover:underline hover:underline-offset-3"
+            [routerLink]="['/profile', review().author.id]"
+            >{{ review().author.name }}</a
+        >
+        <a
+            class="text-neutral-400 text-md font-normal"
+            [routerLink]="['/profile', review().author.id]"
+            >@{{ review().author.username }}</a
+        >
     </div>
     @if(review().comment) {
     <p class="text-md font-normal line-clamp-3">

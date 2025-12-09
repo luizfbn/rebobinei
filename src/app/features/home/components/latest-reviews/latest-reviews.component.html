@@ -9,7 +9,7 @@
         @for(review of reviews().data; track $index){
         <li>
             <a
-                [routerLink]="['/', { outlets: { modal: ['reviews', review.id] } }]"
+                [routerLink]="['/movies', review.movie.tmdbId, 'reviews', review.id]"
                 class="relative flex flex-col p-5 rounded-lg transition-all size-full max-w-112 max-h-63 hover:scale-105 focus:scale-105"
             >
                 <img

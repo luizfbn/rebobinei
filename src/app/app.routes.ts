@@ -24,14 +24,15 @@ export const routes: Routes = [
             movie: movieDetailsResolver,
             reviewStats: movieStatsResolver,
         },
-    },
-    {
-        path: 'reviews/:id',
-        component: ReviewDetailModalComponent,
-        outlet: 'modal',
-        resolve: {
-            review: reviewDetailsResolver,
-        },
+        children: [
+            {
+                path: 'reviews/:id',
+                component: ReviewDetailModalComponent,
+                resolve: {
+                    review: reviewDetailsResolver,
+                },
+            },
+        ],
     },
     {
         path: 'search',
@@ -40,6 +41,15 @@ export const routes: Routes = [
     {
         path: 'profile/:id',
         component: ProfilePageComponent,
+        children: [
+            {
+                path: 'reviews/:id',
+                component: ReviewDetailModalComponent,
+                resolve: {
+                    review: reviewDetailsResolver,
+                },
+            },
+        ],
     },
     {
         path: 'settings',
@@ -48,12 +58,8 @@ export const routes: Routes = [
             { path: '', redirectTo: 'account', pathMatch: 'full' },
             { path: 'account', component: AccountSettingsPageComponent },
             { path: 'password', component: PasswordSettingsPageComponent },
+            { path: 'delete', component: DeleteAccountModalComponent },
         ],
-    },
-    {
-        path: 'settings/delete',
-        component: DeleteAccountModalComponent,
-        outlet: 'modal',
     },
     { path: '**', component: HomePageComponent },
 ];

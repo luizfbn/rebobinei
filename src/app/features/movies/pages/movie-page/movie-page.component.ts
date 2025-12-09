@@ -1,4 +1,5 @@
 import { Component, inject, input, numberAttribute, OnDestroy, OnInit } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
 import { MovieDetailsComponent } from '../../components/movie-details/movie-details.component';
 import { CastMembersComponent } from '../../components/cast-members/cast-members.component';
 import { MovieReviewsComponent } from '../../components/movie-reviews/movie-reviews.component';
@@ -10,7 +11,7 @@ import { ReviewContextService } from '../../../reviews/services/review-context.s
 
 @Component({
     selector: 'app-movie-page',
-    imports: [MovieDetailsComponent, CastMembersComponent, MovieReviewsComponent],
+    imports: [MovieDetailsComponent, CastMembersComponent, MovieReviewsComponent, RouterOutlet],
     templateUrl: './movie-page.component.html',
     styleUrl: './movie-page.component.css',
 })
