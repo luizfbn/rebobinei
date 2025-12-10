@@ -2,12 +2,12 @@
     <h1
         class="text-neutral-200 font-bold text-2xl tracking-wide uppercase mb-1 px-5 break-all sm:text-5xl"
     >
-        Usuário
+        {{ profile().name }}
     </h1>
     <h2
         class="text-neutral-400 font-normal text-lg mb-10 px-5 tracking-wide break-all sm:text-xl sm:mb-15"
     >
-        @usuario
+        @{{ profile().username }}
     </h2>
     <article class="mx-5">
         <div class="flex items-center mb-6">
@@ -18,7 +18,13 @@
             </h3>
             <span class="block flex-1 h-[1px] rounded-lg bg-neutral-700 max-w-20"></span>
         </div>
-        <app-user-review-list [page]="page()" [userId]="userId()"></app-user-review-list>
+        <app-user-review-list
+            [page]="page()"
+            [userId]="userId()"
+            [currentUser]="authService.currentUser()"
+            [isDeletingReview]="isDeletingReview()"
+            (delete)="onDeleteReview($event)"
+        ></app-user-review-list>
     </article>
 </section>
 <router-outlet></router-outlet>

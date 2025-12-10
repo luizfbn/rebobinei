@@ -1,21 +1,28 @@
 <ul class="max-w-250 m-auto mb-8 *:mb-4">
-    @for(review of reviews.data; track review.id) {
+    @if (loading()) { @for (n of skeletonCount; track $index) {
+    <li class="bg-neutral-800 animate-pulse rounded-lg w-full h-50"></li>
+    } } @else { @for(review of reviews().data; track review.id) {
     <li>
-        <app-user-review-item [review]="review"></app-user-review-item>
+        <app-user-review-item
+            [review]="review"
+            [canDelete]="userId() === currentUser()?.id"
+            (delete)="onDeleteReview($event)"
+            [isLoading]="isDeletingReview()"
+        ></app-user-review-item>
     </li>
-    } @if (reviews.totalResults === 0) {
+    } @empty {
     <li>
         <p class="text-neutral-400 text-lg font-normal text-center p-3">
             Este usuário ainda não fez avaliações.
         </p>
     </li>
-    }
+    }}
 </ul>
-@if (reviews.totalPages > 1) {
+@if (reviews().totalPages > 1) {
 <app-page-selector
     class="flex justify-center"
     [currentPage]="page()"
     (currentPageChange)="navigateToPage($event)"
-    [totalPages]="reviews.totalPages"
+    [totalPages]="reviews().totalPages"
 ></app-page-selector>
 }

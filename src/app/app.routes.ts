@@ -11,6 +11,7 @@ import { ReviewDetailModalComponent } from './features/reviews/modals/review-det
 import { movieDetailsResolver } from './features/movies/resolvers/movie-details.resolver';
 import { movieStatsResolver } from './features/movies/resolvers/movie-stats.resolver';
 import { reviewDetailsResolver } from './features/reviews/resolvers/review-details.resolver';
+import { profileResolver } from './features/profile/resolvers/profile.resolver';
 
 export const routes: Routes = [
     {
@@ -41,6 +42,9 @@ export const routes: Routes = [
     {
         path: 'profile/:id',
         component: ProfilePageComponent,
+        resolve: {
+            profile: profileResolver,
+        },
         children: [
             {
                 path: 'reviews/:id',

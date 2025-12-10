@@ -1,9 +1,13 @@
-import { Component, effect, inject, input } from '@angular/core';
+import { Component, effect, inject, input, output, signal } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { UserReviewItemComponent } from '../user-review-item/user-review-item.component';
 import { PageSelectorComponent } from '../../../../shared/components/page-selector/page-selector.component';
 import { Pagination } from '../../../../shared/models/pagination.model';
 import { ReviewWithMovie } from '../../../../core/review/models/review-with-movie.model';
+import { User } from '../../../../core/user/models/user.model';
+import { UserService } from '../../../../core/user/services/user.service';
+import { ReviewContextService } from '../../../reviews/services/review-context.service';
 
 @Component({
     selector: 'app-user-review-list',
@@ -12,42 +16,50 @@ import { ReviewWithMovie } from '../../../../core/review/models/review-with-movi
     styleUrl: './user-review-list.component.css',
 })
 export class UserReviewListComponent {
+    userService = inject(UserService);
+    reviewContext = inject(ReviewContextService);
     router = inject(Router);
     route = inject(ActivatedRoute);
 
     userId = input.required<string>();
     page = input.required<number>();
+    currentUser = input<User | null>();
+    delete = output<string>();
+    isDeletingReview = input(false);
 
-    reviews = {
+    skeletonCount = Array.from({ length: 5 });
+    loading = signal(false);
+
+    reviews = signal<Pagination<ReviewWithMovie>>({
+        data: [],
         page: 1,
-        totalPages: 100,
-        totalResults: 2,
-        data: [
-            {
-                id: '123',
-                rating: 4,
-                comment: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-            incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur
-            adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna.`,
-                createdAt: '2025-10-15',
-                movie: {
-                    tmdbId: 123,
-                    title: 'Superman',
-                    originalTitle: 'Superman',
-                    overview: 'Superman bla bla bla',
-                    posterUrl:
-                        'https://media.themoviedb.org/t/p/w300_and_h450_bestv2/xeZ8oG6W60fEPf9yCjERUXiHRBF.jpg',
-                    backdropUrl:
-                        'https://media.themoviedb.org/t/p/w300_and_h450_bestv2/xeZ8oG6W60fEPf9yCjERUXiHRBF.jpg',
-                },
-            },
-        ],
-    } as Pagination<ReviewWithMovie>;
+        totalPages: 1,
+        totalResults: 0,
+    });
 
     constructor() {
         effect(() => {
-            console.log(`A URL mudou, buscando dados para a página: ${this.page()}`);
+            this.loadUserReviews();
         });
+        this.reviewContext.reviewDeleted$.pipe(takeUntilDestroyed()).subscribe(() => {
+            this.navigateToPage(1);
+        });
+    }
+
+    loadUserReviews() {
+        this.loading.set(true);
+        this.userService.listUserReviews(this.userId(), { page: this.page() }).subscribe({
+            next: (reviews) => this.reviews.set(reviews),
+            error: (err) => {
+                this.loading.set(false);
+                console.error(err);
+            },
+            complete: () => this.loading.set(false),
+        });
+    }
+
+    onDeleteReview(id: string) {
+        this.delete.emit(id);
     }
 
     navigateToPage(newPage: number) {
