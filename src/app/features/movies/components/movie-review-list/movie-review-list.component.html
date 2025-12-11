@@ -7,7 +7,7 @@
             [review]="review"
             [canDelete]="review.author.id === currentUser()?.id"
             (delete)="onDeleteReview($event)"
-            [isLoading]="deletingReview()"
+            [isLoading]="isDeletingReview()"
         ></app-movie-review-item>
     </li>
     } @empty {

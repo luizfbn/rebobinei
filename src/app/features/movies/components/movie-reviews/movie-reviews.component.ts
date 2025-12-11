@@ -33,7 +33,7 @@ export class MovieReviewsComponent {
 
     userReview = signal<ReviewDetails | null>(null);
     loading = signal(false);
-    submittingReview = signal(false);
+    isSubmittingReview = signal(false);
 
     constructor() {
         effect(() => {
@@ -62,7 +62,7 @@ export class MovieReviewsComponent {
     }
 
     onAddReview(payload: ReviewForm) {
-        this.submittingReview.set(true);
+        this.isSubmittingReview.set(true);
         this.movieStateService
             .addReview(this.movieId(), {
                 rating: payload.rating,
@@ -71,25 +71,24 @@ export class MovieReviewsComponent {
             .subscribe({
                 next: () => this.loadUserReview(),
                 error: (err) => {
-                    this.submittingReview.set(false);
+                    this.isSubmittingReview.set(false);
                     console.error(err);
                 },
-                complete: () => this.submittingReview.set(false),
+                complete: () => this.isSubmittingReview.set(false),
             });
     }
 
     onDeleteReview(id: string) {
-        this.submittingReview.set(true);
+        this.isSubmittingReview.set(true);
         this.movieStateService.deleteReview(id)?.subscribe({
             next: () => {
-                this.userReview.set(null);
                 this.reviewContext.notifyDeleteSuccess(id);
             },
             error: (err) => {
-                this.submittingReview.set(false);
+                this.isSubmittingReview.set(false);
                 console.error(err);
             },
-            complete: () => this.submittingReview.set(false),
+            complete: () => this.isSubmittingReview.set(false),
         });
     }
 }

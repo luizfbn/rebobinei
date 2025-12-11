@@ -16,7 +16,7 @@
                 </p>
                 <app-movie-review-item
                     [review]="userReview()!"
-                    [isLoading]="submittingReview()"
+                    [isLoading]="isSubmittingReview()"
                     [canDelete]="true"
                     (delete)="onDeleteReview($event)"
                 ></app-movie-review-item>
@@ -24,7 +24,7 @@
             } @else {
             <app-review-form
                 (reviewSubmit)="onAddReview($event)"
-                [isLoading]="submittingReview()"
+                [isLoading]="isSubmittingReview()"
                 class="w-full"
             ></app-review-form>
             }
@@ -34,7 +34,7 @@
                 [movieId]="movieId()"
                 [page]="page()"
                 [currentUser]="authService.currentUser()"
-                [deletingReview]="submittingReview()"
+                [isDeletingReview]="isSubmittingReview()"
                 (delete)="onDeleteReview($event)"
                 class="w-full"
             ></app-movie-review-list>

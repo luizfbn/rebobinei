@@ -1,4 +1,4 @@
-import { Component, computed, input, model, OnInit } from '@angular/core';
+import { Component, computed, effect, input, model, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
@@ -13,11 +13,24 @@ export class PageSelectorComponent implements OnInit {
     totalPagesArray = computed(() => Array.from({ length: this.totalPages() }, (_, i) => i + 1));
     selectForm!: FormGroup<{ select: FormControl<number | null> }>;
 
+    constructor() {
+        effect(() => {
+            const page = this.currentPage();
+            if (this.select!.value !== page) {
+                this.select!.setValue(page, { emitEvent: false });
+            }
+        });
+    }
+
     ngOnInit() {
         this.ensureValidCurrentPage();
         this.selectForm = new FormGroup({
             select: new FormControl(this.currentPage()),
         });
+    }
+
+    get select() {
+        return this.selectForm.get('select');
     }
 
     ensureValidCurrentPage() {

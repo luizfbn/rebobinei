@@ -40,9 +40,9 @@ export class MovieStateService {
         return this.movieService.getStats(movieId).pipe(tap((stats) => this.stats.set(stats)));
     }
 
-    loadReviews(movieId: number) {
+    loadReviews(...args: Parameters<MovieService['getReviews']>) {
         return this.movieService
-            .getReviews(movieId)
+            .getReviews(...args)
             .pipe(tap((reviews) => this.reviews.set(reviews)));
     }
 
