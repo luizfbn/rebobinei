@@ -17,8 +17,12 @@ export class MovieReviewItemComponent {
     delete = output<string>();
 
     onDelete(event: PointerEvent) {
+        this.onInnerLinkClick(event);
+        this.delete.emit(this.review().id);
+    }
+
+    onInnerLinkClick(event: Event) {
         event.stopPropagation();
         event.preventDefault();
-        this.delete.emit(this.review().id);
     }
 }

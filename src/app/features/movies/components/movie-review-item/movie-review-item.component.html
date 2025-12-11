@@ -1,6 +1,7 @@
-<a
-    class="bg-neutral-700 text-neutral-200 rounded-lg p-4 flex flex-col w-full"
+<div
+    class="bg-neutral-700 text-neutral-200 rounded-lg p-4 flex flex-col w-full cursor-pointer"
     [routerLink]="['reviews', review().id]"
+    queryParamsHandling="preserve"
 >
     <div class="flex justify-between flex-col sm:flex-row">
         <app-rating [rating]="review().rating" [disabled]="true"></app-rating>
@@ -12,11 +13,13 @@
         <a
             class="text-xl font-bold line-clamp-1 hover:underline hover:underline-offset-3"
             [routerLink]="['/profile', review().author.id]"
+            (click)="onInnerLinkClick($event)"
             >{{ review().author.name }}</a
         >
         <a
             class="text-neutral-400 text-md font-normal"
             [routerLink]="['/profile', review().author.id]"
+            (click)="onInnerLinkClick($event)"
             >@{{ review().author.username }}</a
         >
     </div>
@@ -28,7 +31,7 @@
     <p class="text-md font-normal text-neutral-400">Nenhum comentário realizado.</p>
     } @if (canDelete()) {
     <button
-        class="text-rose-600 font-normal text-sm cursor-pointer underline-offset-1 self-end z-1 hover:underline"
+        class="text-rose-600 font-normal text-sm cursor-pointer underline-offset-1 self-end z-1 mt-3 hover:underline"
         type="button"
         title="Excluir"
         (click)="onDelete($event)"
@@ -37,4 +40,4 @@
         {{ isLoading() ? 'Excluindo...' : 'Excluir' }}
     </button>
     }
-</a>
+</div>

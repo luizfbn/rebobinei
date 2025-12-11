@@ -26,7 +26,10 @@ export class ReviewDetailModalComponent {
     deletingReview = signal(false);
 
     closeModal() {
-        this.router.navigate(['../../'], { relativeTo: this.route });
+        this.router.navigate(['../../'], {
+            relativeTo: this.route,
+            queryParamsHandling: 'preserve',
+        });
     }
 
     onDeleteReview(id: string) {
