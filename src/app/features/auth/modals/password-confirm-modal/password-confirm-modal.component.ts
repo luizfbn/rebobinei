@@ -1,4 +1,4 @@
-import { Component, inject, output, signal } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { PasswordConfirmFormComponent } from '../../components/password-confirm-form/password-confirm-form.component';
 import { ModalRef } from '../../../../shared/modal/modal-ref';
 
@@ -13,8 +13,6 @@ import { ModalRef } from '../../../../shared/modal/modal-ref';
 })
 export class PasswordConfirmModalComponent {
     modalRef = inject(ModalRef<string>);
-
-    submitPassword = output<string>();
 
     close(password?: string) {
         this.modalRef.close(password);

@@ -1,4 +1,4 @@
-import { Component, input, output } from '@angular/core';
+import { Component, effect, input, output } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
@@ -11,12 +11,18 @@ export class PasswordConfirmFormComponent {
     submitLabel = input<string>('Confirmar');
     cancelLabel = input<string>('Cancelar');
     isLoading = input(false);
-    submitPassword = output<string>();
+    passwordSubmit = output<string>();
     cancel = output<void>();
 
     passwordForm = new FormGroup({
         password: new FormControl('', [Validators.required]),
     });
+
+    constructor() {
+        effect(() => {
+            this.isLoading() ? this.passwordForm.disable() : this.passwordForm.enable();
+        });
+    }
 
     get password() {
         return this.passwordForm.get('password');
@@ -24,6 +30,6 @@ export class PasswordConfirmFormComponent {
 
     onSubmit() {
         if (this.passwordForm.invalid) return;
-        this.submitPassword.emit(this.passwordForm.value.password!);
+        this.passwordSubmit.emit(this.passwordForm.value.password as string);
     }
 }
