@@ -1,4 +1,4 @@
-import { Component, output } from '@angular/core';
+import { Component, effect, input, output } from '@angular/core';
 import {
     AbstractControl,
     FormControl,
@@ -7,6 +7,7 @@ import {
     ValidationErrors,
     Validators,
 } from '@angular/forms';
+import { PasswordForm } from '../../models/password-form.model';
 
 @Component({
     selector: 'app-password-form',
@@ -15,18 +16,29 @@ import {
     styleUrl: './password-form.component.css',
 })
 export class PasswordFormComponent {
-    passwordSubmit = output<typeof this.passwordForm.value>();
+    passwordSubmit = output<PasswordForm>();
+    isLoading = input<boolean>(false);
 
     passwordForm = new FormGroup(
         {
             currentPassword: new FormControl('', [Validators.required]),
-            newPassword: new FormControl('', [Validators.required, Validators.minLength(6)]),
+            newPassword: new FormControl('', [
+                Validators.required,
+                Validators.minLength(6),
+                Validators.maxLength(64),
+            ]),
             passwordConfirmation: new FormControl('', [Validators.required]),
         },
         {
             validators: this.matchPasswordsValidator,
         }
     );
+
+    constructor() {
+        effect(() => {
+            this.isLoading() ? this.passwordForm.disable() : this.passwordForm.enable();
+        });
+    }
 
     get currentPassword() {
         return this.passwordForm.get('currentPassword');
@@ -47,8 +59,7 @@ export class PasswordFormComponent {
     }
 
     onSubmit() {
-        if (this.passwordForm.valid) {
-            this.passwordSubmit.emit(this.passwordForm.value);
-        }
+        if (this.passwordForm.invalid) return;
+        this.passwordSubmit.emit(this.passwordForm.value as PasswordForm);
     }
 }
