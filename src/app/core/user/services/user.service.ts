@@ -29,7 +29,7 @@ export class UserService {
         return this.http.patch<Profile>(`${this.baseUrl}/me`, data);
     }
 
-    changeEmail(data: { email: string; password: string }) {
+    changeEmail(data: { newEmail: string; password: string }) {
         return this.http.patch<void>(`${this.baseUrl}/me/email`, data);
     }
 

@@ -4,10 +4,39 @@
         <input id="name" class="input" type="text" formControlName="name" />
         @if (name?.invalid && name?.touched) {
         <div class="text-xs font-normal text-rose-400">
-            @if (name?.hasError('minlength')) {
+            @if (name?.hasError('required')) {
+            <p>Informe o nome.</p>
+            } @else if (name?.hasError('minlength')) {
             <p>O nome deve conter pelo menos 3 caracteres.</p>
+            } @else if (name?.hasError('maxlength')) {
+            <p>O nome deve conter no máximo 50 caracteres.</p>
             } @else if (name?.hasError('whitespace')) {
             <p>Informe um nome válido.</p>
+            }
+        </div>
+        }
+    </div>
+    <div class="w-full mb-3 flex flex-col gap-1">
+        <label for="username" class="text-sm font-semibold text-neutral-200">Nome de usuário</label>
+        <input
+            id="username"
+            class="input"
+            type="text"
+            formControlName="username"
+            appRestrictSpaces
+        />
+        @if (username?.invalid && username?.touched) {
+        <div class="text-xs font-normal text-rose-400">
+            @if (username?.hasError('required')) {
+            <p>Informe o nome de usuário.</p>
+            } @else if (username?.hasError('minlength')) {
+            <p>O nome de usuário deve conter pelo menos 3 caracteres.</p>
+            } @else if (username?.hasError('maxlength')) {
+            <p>O nome de usuário deve conter no máximo 30 caracteres.</p>
+            } @else if (username?.hasError('whitespace')) {
+            <p>Informe um nome de usuário válido.</p>
+            } @else if (username?.hasError('specialcharacters')) {
+            <p>O nome de usuário pode conter apenas letras, números e underscores (sem espaços).</p>
             }
         </div>
         }
@@ -27,8 +56,8 @@
         class="btn float-end"
         type="submit"
         title="Salvar mudanças"
-        [disabled]="accountForm.invalid"
+        [disabled]="!canSubmit() || isLoading()"
     >
-        Salvar mudanças
+        {{ isLoading() ? 'Carregando...' : 'Salvar mudanças' }}
     </button>
 </form>

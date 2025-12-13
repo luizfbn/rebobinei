@@ -1,3 +1,7 @@
 <section class="max-w-2xl">
-    <app-account-form (accountSubmit)="onChangeAccount($event)"></app-account-form>
+    <app-account-form
+        (accountSubmit)="onChangeAccount($event)"
+        [isLoading]="loading()"
+    ></app-account-form>
 </section>
+<ng-container #passwordConfirmModal></ng-container>

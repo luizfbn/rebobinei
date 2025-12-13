@@ -12,6 +12,7 @@ import { movieDetailsResolver } from './features/movies/resolvers/movie-details.
 import { movieStatsResolver } from './features/movies/resolvers/movie-stats.resolver';
 import { reviewDetailsResolver } from './features/reviews/resolvers/review-details.resolver';
 import { profileResolver } from './features/profile/resolvers/profile.resolver';
+import { authGuard } from './core/auth/guards/auth.guard';
 
 export const routes: Routes = [
     {
@@ -58,6 +59,7 @@ export const routes: Routes = [
     {
         path: 'settings',
         component: SettingsPageComponent,
+        canActivate: [authGuard],
         children: [
             { path: '', redirectTo: 'account', pathMatch: 'full' },
             { path: 'account', component: AccountSettingsPageComponent },
