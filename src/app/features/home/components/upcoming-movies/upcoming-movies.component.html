@@ -6,7 +6,9 @@
         <span class="block flex-1 h-[1px] rounded-lg bg-neutral-700 max-w-20"></span>
     </div>
     <ul class="flex flex-wrap justify-center gap-4 sm:gap-8">
-        @for (movie of movies().data; track $index) {
+        @if (loading()) { @for (n of skeletonCount; track $index) {
+        <li class="bg-neutral-800 animate-pulse rounded-lg w-full min-w-50 max-w-112 h-60"></li>
+        } } @else { @for (movie of movies().data; track $index) {
         <li>
             <a
                 [routerLink]="['/movies', movie.tmdbId]"
@@ -30,6 +32,6 @@
                 </h6>
             </a>
         </li>
-        }
+        } }
     </ul>
 </section>

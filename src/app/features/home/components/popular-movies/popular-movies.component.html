@@ -1,26 +1,28 @@
 <section class="relative py-10 px-5">
     <img
         class="absolute inset-0 size-full object-cover brightness-40 -z-10 fade-borders"
-        [src]="activeMovie().backdropUrl"
+        [src]="activeMovie()?.backdropUrl"
         alt=""
     />
     <div class="mt-15 md:mt-30 mb-20 h-60">
         <h1
             class="max-w-4xl text-neutral-200 font-bold text-2xl tracking-wide uppercase mb-4 line-clamp-2 text-balance sm:text-5xl"
         >
-            {{ activeMovie().title }}
+            {{ activeMovie()?.title }}
         </h1>
         <h2 class="max-w-2xl text-neutral-200 font-normal text-lg mb-5 line-clamp-4 md:text-xl">
-            {{ activeMovie().overview }}
+            {{ activeMovie()?.overview }}
         </h2>
+        @if(activeMovie()) {
         <button
             class="btn"
             type="button"
             title="Saiba mais"
-            [routerLink]="['/movies', activeMovie().tmdbId]"
+            [routerLink]="['/movies', activeMovie()?.tmdbId]"
         >
             Saiba mais
         </button>
+        }
     </div>
 
     <div>
@@ -32,7 +34,9 @@
         <ul
             class="overflow-x-auto py-4 px-2 mx-5 flex gap-4 sm:gap-8 *:shrink-0 scrollbar scroll-smooth"
         >
-            @for(movie of movies().data; track $index){
+            @if (loading()) { @for (n of skeletonCount; track $index) {
+            <li class="bg-neutral-800 animate-pulse rounded-lg w-28 h-40 md:w-42 md:h-60"></li>
+            } } @else { @for(movie of movies().data; track $index){
             <li>
                 <a
                     [routerLink]="['/movies', movie.tmdbId]"
@@ -52,7 +56,7 @@
                     />
                 </a>
             </li>
-            }
+            } }
         </ul>
     </div>
 </section>

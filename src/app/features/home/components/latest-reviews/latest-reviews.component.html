@@ -5,12 +5,14 @@
         </h3>
         <span class="block flex-1 h-[1px] rounded-lg bg-neutral-700 max-w-20"></span>
     </div>
-    <ul class="flex flex-wrap justify-center gap-4 sm:gap-8">
-        @for(review of reviews().data; track $index){
+    <ul class="flex flex-wrap gap-4 sm:gap-8 justify-center *:flex-1 *:justify-items-center">
+        @if (loading()) { @for (n of skeletonCount; track $index) {
+        <li class="bg-neutral-800 animate-pulse rounded-lg w-full min-w-50 max-w-112 h-50"></li>
+        } } @else { @for(review of reviews().data; track $index){
         <li>
             <a
                 [routerLink]="['/movies', review.movie.tmdbId, 'reviews', review.id]"
-                class="relative flex flex-col p-5 rounded-lg transition-all size-full max-w-112 max-h-63 hover:scale-105 focus:scale-105"
+                class="relative flex flex-col p-5 rounded-lg transition-all size-full min-w-50 max-w-112 max-h-63 hover:scale-105 focus:scale-105"
             >
                 <img
                     class="absolute inset-0 size-full object-cover brightness-30 -z-10 rounded-lg"
@@ -38,6 +40,6 @@
                 }
             </a>
         </li>
-        }
+        } }
     </ul>
 </section>
