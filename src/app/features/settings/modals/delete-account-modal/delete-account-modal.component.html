@@ -28,13 +28,20 @@
             <span class="block flex-1 h-[1px] rounded-lg bg-neutral-700 max-w-20"></span>
         </div>
         @switch (step()) { @case (1) {
-        <app-delete-confirm-step (confirm)="step.set(2)" (cancel)="closeModal()" />
-        } @case (2) {
+        <app-delete-confirm-step (confirm)="setStep(2)" (cancel)="closeModal()" />
+        } @case (2) { @if(this.alert().show) {
+        <app-alert
+            [type]="this.alert().type"
+            [message]="this.alert().message"
+            (dismissed)="this.alert().show = false"
+            class="mb-3"
+        ></app-alert>
+        }
         <app-password-confirm-form
             submitLabel="Confirmar exclusão"
             cancelLabel="Voltar"
             [isLoading]="isDeleting()"
-            (cancel)="step.set(1)"
+            (cancel)="setStep(1)"
             (passwordSubmit)="confirmDelete($event)"
         />
         } }

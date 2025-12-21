@@ -1,4 +1,12 @@
 <section class="max-w-2xl">
+    @if(this.alert().show) {
+    <app-alert
+        [type]="this.alert().type"
+        [message]="this.alert().message"
+        (dismissed)="this.alert().show = false"
+        class="block mb-6"
+    ></app-alert>
+    }
     <app-account-form
         (accountSubmit)="onChangeAccount($event)"
         [isLoading]="loading()"

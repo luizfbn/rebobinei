@@ -1,14 +1,16 @@
 import { Component, inject, signal, ViewChild, ViewContainerRef } from '@angular/core';
 import { filter, finalize, of, switchMap, tap } from 'rxjs';
 import { AccountFormComponent } from '../../components/account-form/account-form.component';
+import { AlertComponent } from '../../../../shared/components/alert/alert.component';
 import { AccountForm } from '../../models/account-form.model';
+import { Alert } from '../../../../shared/models/alert.model';
 import { UserService } from '../../../../core/user/services/user.service';
 import { AuthService } from '../../../../core/auth/services/auth.service';
 import { PasswordConfirmModalService } from '../../../auth/modals/password-confirm-modal/password-confirm-modal.service';
 
 @Component({
     selector: 'app-account-settings-page',
-    imports: [AccountFormComponent],
+    imports: [AccountFormComponent, AlertComponent],
     templateUrl: './account-settings-page.component.html',
     styleUrl: './account-settings-page.component.css',
 })
@@ -21,6 +23,11 @@ export class AccountSettingsPageComponent {
     passwordConfirmModalContainer!: ViewContainerRef;
 
     loading = signal(false);
+    alert = signal<Alert>({
+        type: 'error',
+        message: 'Ocorreu um erro.',
+        show: false,
+    });
 
     onChangeAccount(credentials: AccountForm) {
         const currentUserData = {
@@ -47,8 +54,16 @@ export class AccountSettingsPageComponent {
                     error: (err) => {
                         this.loading.set(false);
                         console.error(err);
+                        this.alert.set({ type: 'error', message: err.error?.message, show: true });
                     },
-                    complete: () => this.loading.set(false),
+                    complete: () => {
+                        this.alert.set({
+                            type: 'success',
+                            message: 'Perfil atualizado com sucesso!',
+                            show: true,
+                        });
+                        this.loading.set(false);
+                    },
                 });
             return;
         }
@@ -76,7 +91,16 @@ export class AccountSettingsPageComponent {
             )
             .subscribe({
                 next: () => this.authService.loadUser().subscribe(),
-                error: (err) => console.error(err),
+                error: (err) => {
+                    console.error(err);
+                    this.alert.set({ type: 'error', message: err.error?.message, show: true });
+                },
+                complete: () =>
+                    this.alert.set({
+                        type: 'success',
+                        message: 'Perfil atualizado com sucesso!',
+                        show: true,
+                    }),
             });
     }
 
