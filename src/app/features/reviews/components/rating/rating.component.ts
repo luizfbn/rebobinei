@@ -1,4 +1,4 @@
-import { Component, forwardRef, model, signal } from '@angular/core';
+import { Component, forwardRef, input, model, signal } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { RATINGS } from '../../../../core/review/models/rating.model';
 
@@ -16,6 +16,7 @@ import { RATINGS } from '../../../../core/review/models/rating.model';
     ],
 })
 export class RatingComponent implements ControlValueAccessor {
+    customClass = input<string>('w-5 h-5');
     rating = model(0);
     disabled = model(false);
     items = signal([...RATINGS]);
