@@ -1,4 +1,4 @@
-<ul class="max-w-250 m-auto mb-8 *:mb-4">
+<ul class="max-w-250 m-auto *:mb-4">
     @if (loading()) { @for (n of skeletonCount; track $index) {
     <li class="bg-neutral-800 animate-pulse rounded-lg w-full h-20"></li>
     } } @else { @for (review of movieStateService.reviews().data; track $index) {
