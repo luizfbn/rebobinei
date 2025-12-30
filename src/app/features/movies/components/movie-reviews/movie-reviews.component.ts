@@ -3,7 +3,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MovieReviewListComponent } from '../movie-review-list/movie-review-list.component';
 import { ReviewFormComponent } from '../../../reviews/components/review-form/review-form.component';
 import { MovieReviewStatsComponent } from '../movie-review-stats/movie-review-stats.component';
-import { MovieReviewItemComponent } from '../movie-review-item/movie-review-item.component';
+import { MovieReviewCurrentUserComponent } from '../movie-review-current-user/movie-review-current-user.component';
 import { ReviewDetails } from '../../../../core/review/models/review-details.model';
 import { ReviewForm } from '../../../reviews/models/review-form.model';
 import { AuthService } from '../../../../core/auth/services/auth.service';
@@ -17,7 +17,7 @@ import { ReviewContextService } from '../../../reviews/services/review-context.s
         MovieReviewListComponent,
         ReviewFormComponent,
         MovieReviewStatsComponent,
-        MovieReviewItemComponent,
+        MovieReviewCurrentUserComponent,
     ],
     templateUrl: './movie-reviews.component.html',
     styleUrl: './movie-reviews.component.css',

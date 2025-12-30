@@ -1,0 +1,69 @@
+<div
+    class="p-6 cursor-pointer bg-gradient-to-br from-rose-950/20 to-neutral-900/50 border-2 border-rose-600/50 rounded-lg"
+    [routerLink]="['reviews', review().id]"
+    queryParamsHandling="preserve"
+>
+    <div class="flex items-center justify-between gap-1 mb-2">
+        <div class="flex items-center gap-2">
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                height="20"
+                width="20"
+                viewBox="0 -960 960 960"
+                fill="#FF2056"
+            >
+                <path
+                    d="M480-80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q65 0 123 19t107 53l-58 59q-38-24-81-37.5T480-800q-133 0-226.5 93.5T160-480q0 133 93.5 226.5T480-160q133 0 226.5-93.5T800-480q0-18-2-36t-6-35l65-65q11 32 17 66t6 70q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm-56-216L254-466l56-56 114 114 400-401 56 56-456 457Z"
+                />
+            </svg>
+            <p class="text-rose-400 font-medium text-sm">Sua avaliação</p>
+        </div>
+        <button
+            class="p-2 rounded-lg transition-colors cursor-pointer hover:*:fill-rose-400 hover:bg-neutral-700/50"
+            type="button"
+            title="Excluir avaliação"
+            (click)="onDelete($event)"
+            [disabled]="isLoading()"
+        >
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                height="16"
+                width="16"
+                viewBox="0 -960 960 960"
+                class="fill-neutral-500"
+            >
+                <path
+                    d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z"
+                />
+            </svg>
+        </button>
+    </div>
+
+    <div class="flex items-center gap-1">
+        <a
+            class="text-sm text-neutral-50 font-semibold line-clamp-1 group-hover:text-rose-400 hover:underline hover:underline-offset-3"
+            [routerLink]="['/profile', review().author.id]"
+            (click)="onInnerLinkClick($event)"
+            >{{ review().author.name }}</a
+        >
+        <a
+            class="text-neutral-400 text-xs"
+            [routerLink]="['/profile', review().author.id]"
+            (click)="onInnerLinkClick($event)"
+            >@{{ review().author.username }}</a
+        >
+    </div>
+    <div class="flex mb-3 leading-none">
+        <app-rating [rating]="review().rating" [disabled]="true" customClass="w-3 h-3"></app-rating>
+    </div>
+    @if(review().comment) {
+    <p class="text-sm text-neutral-300 line-clamp-3 mb-3">
+        {{ review().comment }}
+    </p>
+    } @else {
+    <p class="text-sm text-neutral-500 mb-3">Nenhum comentário realizado.</p>
+    }
+    <p class="text-xs text-neutral-500">
+        {{ review().createdAt | date : 'dd/MM/yyyy' }}
+    </p>
+</div>
