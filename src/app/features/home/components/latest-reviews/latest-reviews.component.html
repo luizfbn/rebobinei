@@ -12,10 +12,10 @@
         <li>
             <a
                 [routerLink]="['/movies', review.movie.tmdbId, 'reviews', review.id]"
-                class="relative flex flex-col p-5 rounded-lg transition-all size-full min-w-50 max-w-112 max-h-63 hover:scale-105 focus:scale-105"
+                class="relative flex flex-col p-5 rounded-lg transition-all size-full min-w-50 max-w-112 max-h-63 group overflow-hidden"
             >
                 <img
-                    class="absolute inset-0 size-full object-cover brightness-30 -z-10 rounded-lg"
+                    class="absolute inset-0 size-full object-cover brightness-30 -z-10 rounded-lg group-hover:scale-105 group-focus:scale-105 transition-transform"
                     [src]="review.movie.backdropUrl"
                     alt=""
                 />
