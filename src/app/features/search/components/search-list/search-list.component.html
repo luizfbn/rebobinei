@@ -18,8 +18,8 @@
                 class="w-50 h-72 aspect-[7/10] rounded-lg"
                 [src]="movie.posterUrl || '/assets/broken-image.svg'"
                 [alt]="movie.title"
-                [class.border-1]="!movie.posterUrl"
-                [class.border-neutral-700]="!movie.posterUrl"
+                [class.border]="!movie.posterUrl"
+                [class.border-neutral-800]="!movie.posterUrl"
             />
         </app-media-card>
     </li>

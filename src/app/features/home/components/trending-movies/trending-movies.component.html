@@ -36,7 +36,7 @@
     >
         <img
             class="absolute inset-0 size-full object-cover brightness-80 -z-10"
-            [src]="movie.backdropUrl"
+            [src]="movie.backdropUrl || '/assets/broken-image.svg'"
             alt=""
         />
         <div

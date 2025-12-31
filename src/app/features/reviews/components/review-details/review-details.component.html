@@ -2,8 +2,10 @@
     <div class="text-neutral-200 flex gap-3 flex-col items-center mb-4 sm:flex-row">
         <img
             class="w-28 h-40 aspect-[7/10] rounded-lg"
-            [src]="review().movie.posterUrl"
+            [src]="review().movie.posterUrl || '/assets/broken-image.svg'"
             [alt]="review().movie.title"
+            [class.border]="!review().movie.posterUrl"
+            [class.border-neutral-800]="!review().movie.posterUrl"
         />
         <div class="flex flex-col self-start">
             <a

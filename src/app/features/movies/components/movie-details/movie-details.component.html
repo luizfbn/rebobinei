@@ -3,7 +3,7 @@
         <div class="absolute inset-0 -z-10">
             <img
                 class="size-full object-cover"
-                [src]="movieStateService.movie()?.backdropUrl"
+                [src]="movieStateService.movie()?.backdropUrl || '/assets/broken-image.svg'"
                 alt=""
             />
             <div
@@ -16,7 +16,7 @@
         <div class="flex gap-8 flex-col h-full self-end md:flex-row md:items-end">
             <img
                 class="w-56 h-80 aspect-[7/10] rounded-lg self-center border border-neutral-800 md:self-auto"
-                [src]="movieStateService.movie()?.posterUrl"
+                [src]="movieStateService.movie()?.posterUrl || '/assets/broken-image.svg'"
                 [alt]="movieStateService.movie()?.title"
             />
             <div class="flex-1">

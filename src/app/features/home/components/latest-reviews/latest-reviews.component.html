@@ -16,7 +16,7 @@
             >
                 <img
                     class="absolute inset-0 size-full object-cover brightness-30 -z-10 rounded-lg group-hover:scale-105 group-focus:scale-105 transition-transform"
-                    [src]="review.movie.backdropUrl"
+                    [src]="review.movie.backdropUrl || '/assets/broken-image.svg'"
                     alt=""
                 />
                 <app-rating [rating]="review.rating" [disabled]="true"></app-rating>
