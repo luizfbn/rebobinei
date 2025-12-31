@@ -90,17 +90,18 @@ export class AccountSettingsPageComponent {
                 finalize(() => this.loading.set(false))
             )
             .subscribe({
-                next: () => this.authService.loadUser().subscribe(),
-                error: (err) => {
-                    console.error(err);
-                    this.alert.set({ type: 'error', message: err.error?.message, show: true });
-                },
-                complete: () =>
+                next: () => {
+                    this.authService.loadUser().subscribe();
                     this.alert.set({
                         type: 'success',
                         message: 'Perfil atualizado com sucesso!',
                         show: true,
-                    }),
+                    });
+                },
+                error: (err) => {
+                    console.error(err);
+                    this.alert.set({ type: 'error', message: err.error?.message, show: true });
+                },
             });
     }
 
