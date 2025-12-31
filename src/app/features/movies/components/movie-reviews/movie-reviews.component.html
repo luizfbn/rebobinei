@@ -1,56 +1,60 @@
-<section class="mb-7 mx-5">
-    <div class="flex items-center mb-6">
-        <h3 class="text-neutral-200 font-semibold text-xl tracking-wide uppercase pr-2 sm:text-2xl">
-            Avaliações
-        </h3>
-        <span class="block flex-1 h-[1px] rounded-lg bg-neutral-700 max-w-20"></span>
-    </div>
-    <article class="grid grid-cols-1 gap-x-12 gap-y-3 md:grid-cols-3">
-        <div class="flex flex-col items-center gap-5 md:col-span-2">
-            @if(this.alert().show) {
-            <app-alert
-                [type]="this.alert().type"
-                [message]="this.alert().message"
-                (dismissed)="this.alert().show = false"
-                class="bg-neutral-900 rounded-lg sticky inset-0 top-35 sm:top-25 w-full z-1"
-            ></app-alert>
-            } @if(authService.currentUser()) { @if(loading()) {
-            <div class="bg-neutral-800 animate-pulse rounded-lg w-full h-30"></div>
-            } @else if (userReview()){
-            <div class="max-w-250 w-full m-auto">
-                <app-movie-review-current-user
-                    [review]="userReview()!"
+<section class="py-12">
+    <div class="container *:mx-5">
+        <div class="flex items-center mb-6">
+            <h3
+                class="text-neutral-200 font-semibold text-xl tracking-wide uppercase pr-2 sm:text-2xl"
+            >
+                Avaliações
+            </h3>
+            <span class="block flex-1 h-[1px] rounded-lg bg-neutral-700 max-w-20"></span>
+        </div>
+        <article class="grid grid-cols-1 gap-x-12 gap-y-3 md:grid-cols-3">
+            <div class="flex flex-col items-center gap-5 md:col-span-2">
+                @if(this.alert().show) {
+                <app-alert
+                    [type]="this.alert().type"
+                    [message]="this.alert().message"
+                    (dismissed)="this.alert().show = false"
+                    class="bg-neutral-950 rounded-lg sticky inset-0 top-30 sm:top-20 w-full z-1"
+                ></app-alert>
+                } @if(authService.currentUser()) { @if(loading()) {
+                <div class="bg-neutral-800 animate-pulse rounded-lg w-full h-30"></div>
+                } @else if (userReview()){
+                <div class="max-w-250 w-full m-auto">
+                    <app-movie-review-current-user
+                        [review]="userReview()!"
+                        [isLoading]="isSubmittingReview()"
+                        [canDelete]="true"
+                        (delete)="onDeleteReview($event)"
+                    ></app-movie-review-current-user>
+                </div>
+                } @else {
+                <app-review-form
+                    (reviewSubmit)="onAddReview($event)"
                     [isLoading]="isSubmittingReview()"
-                    [canDelete]="true"
+                    class="w-full"
+                ></app-review-form>
+                }
+                <span class="block h-[1px] rounded-lg bg-neutral-700 w-20"></span>
+                }
+                <app-movie-review-list
+                    [movieId]="movieId()"
+                    [page]="page()"
+                    [currentUser]="authService.currentUser()"
+                    [isDeletingReview]="isSubmittingReview()"
                     (delete)="onDeleteReview($event)"
-                ></app-movie-review-current-user>
+                    class="w-full"
+                ></app-movie-review-list>
             </div>
-            } @else {
-            <app-review-form
-                (reviewSubmit)="onAddReview($event)"
-                [isLoading]="isSubmittingReview()"
-                class="w-full"
-            ></app-review-form>
-            }
-            <span class="block h-[1px] rounded-lg bg-neutral-700 w-20"></span>
-            }
-            <app-movie-review-list
-                [movieId]="movieId()"
-                [page]="page()"
-                [currentUser]="authService.currentUser()"
-                [isDeletingReview]="isSubmittingReview()"
-                (delete)="onDeleteReview($event)"
-                class="w-full"
-            ></app-movie-review-list>
-        </div>
-        <div class="md:order-last md:relative mb-8">
-            @if (movieStateService.stats()?.totalCount) {
-            <app-movie-review-stats
-                class="md:sticky md:inset-25"
-                [stats]="movieStateService.stats()!"
-            ></app-movie-review-stats>
-            }
-        </div>
-    </article>
+            <div class="md:order-last md:relative mb-8">
+                @if (movieStateService.stats()?.totalCount) {
+                <app-movie-review-stats
+                    class="md:sticky md:inset-25"
+                    [stats]="movieStateService.stats()!"
+                ></app-movie-review-stats>
+                }
+            </div>
+        </article>
+    </div>
 </section>
 <ng-container #reviewDeleteConfirmModal></ng-container>
