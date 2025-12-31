@@ -9,7 +9,7 @@
     >
         @{{ profile().username }}
     </h2>
-    <article class="mx-5">
+    <article class="mx-5 relative">
         <div class="flex items-center mb-6">
             <h3
                 class="text-neutral-200 font-semibold text-xl tracking-wide uppercase pr-2 sm:text-2xl"
@@ -18,6 +18,14 @@
             </h3>
             <span class="block flex-1 h-[1px] rounded-lg bg-neutral-700 max-w-20"></span>
         </div>
+        @if(this.alert().show) {
+        <app-alert
+            [type]="this.alert().type"
+            [message]="this.alert().message"
+            (dismissed)="this.alert().show = false"
+            class="bg-neutral-900 rounded-lg block sticky inset-0 top-35 sm:top-25 max-w-250 m-auto mb-6 z-1"
+        ></app-alert>
+        }
         <app-user-review-list
             [page]="page()"
             [userId]="userId()"
@@ -27,4 +35,5 @@
         ></app-user-review-list>
     </article>
 </section>
+<ng-container #reviewDeleteConfirmModal></ng-container>
 <router-outlet></router-outlet>

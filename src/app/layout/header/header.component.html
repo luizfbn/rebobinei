@@ -1,13 +1,13 @@
 <header
-    class="bg-neutral-900/90 container py-4 flex flex-wrap justify-center items-center gap-6 sticky inset-0 z-10 backdrop-blur-xs"
+    class="bg-neutral-900/90 container py-4 flex flex-col flex-wrap justify-center items-center gap-x-6 gap-y-2 sticky inset-0 z-10 backdrop-blur-xs sm:flex-row"
 >
     <a routerLink="/">
         <img src="assets/logo.svg" alt="Rebobinei logo" />
     </a>
-    <nav class="flex flex-1 items-center justify-end sm:gap-6 gap-3">
+    <nav class="flex flex-1 items-center w-full justify-center sm:justify-end sm:gap-6 gap-3">
         <app-search-trigger
             (onClick)="openSearchModal()"
-            class="w-full max-w-80"
+            class="w-full sm:max-w-80"
         ></app-search-trigger>
         <span class="block w-[1px] h-9 rounded-lg bg-neutral-700"></span>
         @if(authService.isAuthenticated()) {

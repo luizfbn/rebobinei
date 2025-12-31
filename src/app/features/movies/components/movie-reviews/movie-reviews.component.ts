@@ -1,15 +1,27 @@
-import { Component, effect, inject, input, signal } from '@angular/core';
+import {
+    Component,
+    effect,
+    inject,
+    input,
+    signal,
+    ViewChild,
+    ViewContainerRef,
+} from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { EMPTY, filter, finalize, switchMap, tap } from 'rxjs';
 import { MovieReviewListComponent } from '../movie-review-list/movie-review-list.component';
 import { ReviewFormComponent } from '../../../reviews/components/review-form/review-form.component';
 import { MovieReviewStatsComponent } from '../movie-review-stats/movie-review-stats.component';
 import { MovieReviewCurrentUserComponent } from '../movie-review-current-user/movie-review-current-user.component';
+import { AlertComponent } from '../../../../shared/components/alert/alert.component';
+import { Alert } from '../../../../shared/models/alert.model';
 import { ReviewDetails } from '../../../../core/review/models/review-details.model';
 import { ReviewForm } from '../../../reviews/models/review-form.model';
 import { AuthService } from '../../../../core/auth/services/auth.service';
 import { ReviewService } from '../../../../core/review/services/review.service';
 import { MovieStateService } from '../../services/movie-state.service';
 import { ReviewContextService } from '../../../reviews/services/review-context.service';
+import { ReviewDeleteConfirmModalService } from '../../../reviews/modals/review-delete-confirm-modal/review-delete-confirm-modal.service';
 
 @Component({
     selector: 'app-movie-reviews',
@@ -18,6 +30,7 @@ import { ReviewContextService } from '../../../reviews/services/review-context.s
         ReviewFormComponent,
         MovieReviewStatsComponent,
         MovieReviewCurrentUserComponent,
+        AlertComponent,
     ],
     templateUrl: './movie-reviews.component.html',
     styleUrl: './movie-reviews.component.css',
@@ -26,7 +39,11 @@ export class MovieReviewsComponent {
     movieStateService = inject(MovieStateService);
     authService = inject(AuthService);
     reviewService = inject(ReviewService);
+    reviewDeleteConfirmModalService = inject(ReviewDeleteConfirmModalService);
     reviewContext = inject(ReviewContextService);
+
+    @ViewChild('reviewDeleteConfirmModal', { read: ViewContainerRef })
+    reviewDeleteConfirmModalContainer!: ViewContainerRef;
 
     movieId = input.required<number>();
     page = input.required<number>();
@@ -34,6 +51,11 @@ export class MovieReviewsComponent {
     userReview = signal<ReviewDetails | null>(null);
     loading = signal(false);
     isSubmittingReview = signal(false);
+    alert = signal<Alert>({
+        type: 'error',
+        message: 'Ocorreu um erro.',
+        show: false,
+    });
 
     constructor() {
         effect(() => {
@@ -73,22 +95,30 @@ export class MovieReviewsComponent {
                 error: (err) => {
                     this.isSubmittingReview.set(false);
                     console.error(err);
+                    this.alert.set({ type: 'error', message: err.error?.message, show: true });
                 },
                 complete: () => this.isSubmittingReview.set(false),
             });
     }
 
     onDeleteReview(id: string) {
-        this.isSubmittingReview.set(true);
-        this.movieStateService.deleteReview(id)?.subscribe({
-            next: () => {
-                this.reviewContext.notifyDeleteSuccess(id);
-            },
-            error: (err) => {
-                this.isSubmittingReview.set(false);
-                console.error(err);
-            },
-            complete: () => this.isSubmittingReview.set(false),
-        });
+        const reviewDeleteModal = this.reviewDeleteConfirmModalService.open(
+            this.reviewDeleteConfirmModalContainer
+        );
+
+        reviewDeleteModal.afterClosed
+            .pipe(
+                filter((confirmDelete) => confirmDelete === true),
+                tap(() => this.isSubmittingReview.set(true)),
+                switchMap(() => this.movieStateService.deleteReview(id) ?? EMPTY),
+                finalize(() => this.isSubmittingReview.set(false))
+            )
+            .subscribe({
+                next: () => this.reviewContext.notifyDeleteSuccess(id),
+                error: (err) => {
+                    console.error(err);
+                    this.alert.set({ type: 'error', message: err.error?.message, show: true });
+                },
+            });
     }
 }
