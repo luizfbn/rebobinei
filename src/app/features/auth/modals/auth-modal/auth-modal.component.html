@@ -1,13 +1,13 @@
 <section
-    class="bg-neutral-900 p-10 rounded-lg shadow-[0_0px_8px_2px] shadow-neutral-700/25 max-w-md h-fit w-full my-6 mx-4 flex flex-col items-center relative"
+    class="bg-neutral-950 p-10 rounded-lg shadow-[0_0px_8px_2px] shadow-neutral-700/25 max-w-md h-fit w-full my-6 mx-4 flex flex-col items-center relative"
 >
     <button
         type="button"
-        class="absolute top-2 right-2 cursor-pointer hover:scale-110"
+        class="absolute top-2 right-2 p-2 cursor-pointer hover:*:fill-neutral-300 hover:bg-neutral-900 rounded-lg transition-colors"
         (click)="close()"
     >
         <svg
-            class="fill-neutral-700"
+            class="fill-neutral-500 transition-colors h-5 w-5"
             width="24"
             height="24"
             viewBox="0 0 24 24"
@@ -48,7 +48,7 @@
         [isLoading]="loading()"
     ></app-login-form>
     <span class="block max-w-20 w-full h-[1px] my-7 rounded-lg bg-neutral-700"></span>
-    <p class="text-sm text-neutral-400">
+    <p class="text-sm text-neutral-500">
         Não tem uma conta?
         <button
             type="button"
@@ -76,7 +76,7 @@
         [isLoading]="loading()"
     ></app-register-form>
     <span class="block max-w-20 w-full h-[1px] my-7 rounded-lg bg-neutral-700"></span>
-    <p class="text-sm text-neutral-400">
+    <p class="text-sm text-neutral-500">
         Já tem uma conta?
         <button
             type="button"
