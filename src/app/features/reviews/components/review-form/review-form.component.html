@@ -1,6 +1,21 @@
-<form [formGroup]="reviewForm" (ngSubmit)="onSubmit()">
+<form
+    class="p-6 bg-neutral-900/50 border border-neutral-800 rounded-lg hover:border-rose-500/50 transition-all hover:bg-neutral-900/70"
+    [formGroup]="reviewForm"
+    (ngSubmit)="onSubmit()"
+>
     <div class="w-full mb-2">
-        <app-rating formControlName="rating"></app-rating>
+        <label for="rating" class="block text-sm font-semibold text-neutral-200 mb-2"
+            >Sua avaliação</label
+        >
+        <div class="flex items-center leading-none gap-2">
+            <app-rating formControlName="rating" customClass="w-6 h-6"></app-rating>
+            @if (rating?.value) {
+            <span class="text-xl font-bold text-rose-500">{{
+                rating?.value | number : '1.1-1'
+            }}</span>
+            }
+        </div>
+
         @if (rating?.invalid && rating?.touched) {
         <div class="text-xs font-normal text-rose-400">
             @if (rating?.hasError('min')) {
@@ -9,33 +24,44 @@
         </div>
         }
     </div>
-    <div class="w-full mb-1">
+    <div class="w-full mb-3">
+        <label for="comment" class="block text-sm font-semibold text-neutral-200 mb-2"
+            >Escreva sua avaliação
+            <span class="text-neutral-500 font-normal">(opcional)</span></label
+        >
         <textarea
             id="comment"
             class="input w-full resize-none"
             type="text"
             formControlName="comment"
             rows="3"
-            maxlength="1000"
+            [maxlength]="commentMaxLength"
             minlength="1"
-            placeholder="Sua avaliação"
+            placeholder="O que você achou? Compartilhe conosco."
         ></textarea>
-        @if (comment?.invalid && comment?.touched) {
-        <div class="text-xs font-normal text-rose-400">
-            @if (comment?.hasError('maxlength')) {
-            <p>O comentário pode ter até 2000 caracteres.</p>
-            } @else if (comment?.hasError('whitespace')) {
-            <p>Informe um comentário válido.</p>
+        <div class="flex flex-wrap justify-end">
+            @if (comment?.invalid && comment?.touched) {
+            <div class="flex-1 text-xs font-normal text-rose-400">
+                @if (comment?.hasError('maxlength')) {
+                <p>O comentário pode ter até {{ commentMaxLength }} caracteres.</p>
+                } @else if (comment?.hasError('whitespace')) {
+                <p>Informe um comentário válido.</p>
+                }
+            </div>
             }
+            <span class="text-xs text-neutral-500"
+                >{{ comment?.value?.length || 0 }}/{{ commentMaxLength }} caracteres</span
+            >
         </div>
-        }
     </div>
-    <button
-        class="btn float-end"
-        type="submit"
-        title="Avaliar"
-        [disabled]="reviewForm.invalid || isLoading()"
-    >
-        {{ isLoading() ? 'Carregando...' : 'Avaliar' }}
-    </button>
+    <div class="flex justify-end">
+        <button
+            class="btn"
+            type="submit"
+            title="Publicar avaliação"
+            [disabled]="reviewForm.invalid || isLoading()"
+        >
+            {{ isLoading() ? 'Carregando...' : 'Publicar avaliação' }}
+        </button>
+    </div>
 </form>
