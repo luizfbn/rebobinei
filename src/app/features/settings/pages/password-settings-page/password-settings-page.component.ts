@@ -1,5 +1,4 @@
 import { Component, inject, signal } from '@angular/core';
-import { Router } from '@angular/router';
 import { PasswordFormComponent } from '../../components/password-form/password-form.component';
 import { AlertComponent } from '../../../../shared/components/alert/alert.component';
 import { PasswordForm } from '../../models/password-form.model';
@@ -16,7 +15,6 @@ import { AuthService } from '../../../../core/auth/services/auth.service';
 export class PasswordSettingsPageComponent {
     userService = inject(UserService);
     authService = inject(AuthService);
-    router = inject(Router);
 
     loading = signal(false);
     alert = signal<Alert>({
@@ -41,7 +39,6 @@ export class PasswordSettingsPageComponent {
                 },
                 complete: () => {
                     this.loading.set(false);
-                    this.router.navigate(['/']);
                 },
             });
     }
