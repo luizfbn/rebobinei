@@ -5,7 +5,7 @@ import { CastMembersComponent } from '../../components/cast-members/cast-members
 import { MovieReviewsComponent } from '../../components/movie-reviews/movie-reviews.component';
 import { MovieDetails } from '../../../../core/movie/models/movie-details.model';
 import { ReviewStats } from '../../../../core/review/models/review-stats.model';
-import { pageTransform } from '../../../../shared/utils/transformers';
+import { pageTransform } from '../../../../shared/utils/transformers.util';
 import { MovieStateService } from '../../services/movie-state.service';
 import { ReviewContextService } from '../../../reviews/services/review-context.service';
 

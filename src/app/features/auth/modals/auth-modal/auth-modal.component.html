@@ -33,12 +33,12 @@
     </div>
     @switch (view()) { @case ('login') {
     <h2 class="text-neutral-200 font-semibold text-xl uppercase tracking-wide mb-10">Login</h2>
-    @if(this.alert().show) {
+    @if(alert().show) {
     <app-alert
-        [type]="this.alert().type"
-        [message]="this.alert().message"
+        [type]="alert().type"
+        [message]="alert().message"
         [dismissible]="true"
-        (dismissed)="this.alert().show = false"
+        (dismissed)="showAlert(alert, false)"
         class="w-full mb-6"
     ></app-alert>
     }
@@ -62,11 +62,11 @@
     <h2 class="text-neutral-200 font-semibold text-xl uppercase tracking-wide mb-10">
         Criar conta
     </h2>
-    @if(this.alert().show) {
+    @if(alert().show) {
     <app-alert
-        [type]="this.alert().type"
-        [message]="this.alert().message"
-        (dismissed)="this.alert().show = false"
+        [type]="alert().type"
+        [message]="alert().message"
+        (dismissed)="showAlert(alert, false)"
         class="w-full mb-6"
     ></app-alert>
     }

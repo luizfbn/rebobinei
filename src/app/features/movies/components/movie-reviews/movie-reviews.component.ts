@@ -9,12 +9,12 @@ import {
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { EMPTY, filter, finalize, switchMap, tap } from 'rxjs';
+import { createAlert, showAlert } from '../../../../shared/utils/alert.util';
 import { MovieReviewListComponent } from '../movie-review-list/movie-review-list.component';
 import { ReviewFormComponent } from '../../../reviews/components/review-form/review-form.component';
 import { MovieReviewStatsComponent } from '../movie-review-stats/movie-review-stats.component';
 import { MovieReviewCurrentUserComponent } from '../movie-review-current-user/movie-review-current-user.component';
 import { AlertComponent } from '../../../../shared/components/alert/alert.component';
-import { Alert } from '../../../../shared/models/alert.model';
 import { ReviewDetails } from '../../../../core/review/models/review-details.model';
 import { ReviewForm } from '../../../reviews/models/review-form.model';
 import { AuthService } from '../../../../core/auth/services/auth.service';
@@ -51,11 +51,8 @@ export class MovieReviewsComponent {
     userReview = signal<ReviewDetails | null>(null);
     loading = signal(false);
     isSubmittingReview = signal(false);
-    alert = signal<Alert>({
-        type: 'error',
-        message: 'Ocorreu um erro.',
-        show: false,
-    });
+    alert = createAlert();
+    showAlert = showAlert;
 
     constructor() {
         effect(() => {

@@ -1,11 +1,11 @@
 import { Component, inject, input, signal, ViewChild, ViewContainerRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EMPTY, filter, finalize, switchMap, tap } from 'rxjs';
+import { createAlert, showAlert } from '../../../../shared/utils/alert.util';
 import { BaseModalComponent } from '../../../../shared/modal/base-modal/base-modal.component';
 import { ReviewDetailsComponent } from '../../components/review-details/review-details.component';
 import { AlertComponent } from '../../../../shared/components/alert/alert.component';
 import { ReviewDetails } from '../../../../core/review/models/review-details.model';
-import { Alert } from '../../../../shared/models/alert.model';
 import { AuthService } from '../../../../core/auth/services/auth.service';
 import { ReviewContextService } from '../../services/review-context.service';
 import { ReviewDeleteConfirmModalService } from '../review-delete-confirm-modal/review-delete-confirm-modal.service';
@@ -32,11 +32,8 @@ export class ReviewDetailModalComponent {
     review = input.required<ReviewDetails>();
 
     deletingReview = signal(false);
-    alert = signal<Alert>({
-        type: 'error',
-        message: 'Ocorreu um erro.',
-        show: false,
-    });
+    alert = createAlert();
+    showAlert = showAlert;
 
     closeModal() {
         return this.router.navigate(['../../'], {

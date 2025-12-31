@@ -1,10 +1,10 @@
 import { Component, inject, signal } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { createAlert, showAlert } from '../../../../shared/utils/alert.util';
 import { BaseModalComponent } from '../../../../shared/modal/base-modal/base-modal.component';
 import { DeleteConfirmStepComponent } from '../../components/delete-confirm-step/delete-confirm-step.component';
 import { PasswordConfirmFormComponent } from '../../../auth/components/password-confirm-form/password-confirm-form.component';
 import { AlertComponent } from '../../../../shared/components/alert/alert.component';
-import { Alert } from '../../../../shared/models/alert.model';
 import { UserService } from '../../../../core/user/services/user.service';
 import { AuthService } from '../../../../core/auth/services/auth.service';
 
@@ -27,11 +27,8 @@ export class DeleteAccountModalComponent {
 
     step = signal<1 | 2>(1);
     isDeleting = signal(false);
-    alert = signal<Alert>({
-        type: 'error',
-        message: 'Ocorreu um erro.',
-        show: false,
-    });
+    alert = createAlert();
+    showAlert = showAlert;
 
     closeModal() {
         this.router.navigate(['../'], { relativeTo: this.route });
@@ -54,7 +51,7 @@ export class DeleteAccountModalComponent {
     }
 
     setStep(view: 1 | 2) {
-        this.alert().show = false;
+        this.showAlert(this.alert, false);
         this.step.set(view);
     }
 }

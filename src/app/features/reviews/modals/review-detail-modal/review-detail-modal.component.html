@@ -27,11 +27,11 @@
             </h2>
             <span class="block flex-1 h-[1px] rounded-lg bg-neutral-700 max-w-20"></span>
         </div>
-        @if(this.alert().show) {
+        @if(alert().show) {
         <app-alert
-            [type]="this.alert().type"
-            [message]="this.alert().message"
-            (dismissed)="this.alert().show = false"
+            [type]="alert().type"
+            [message]="alert().message"
+            (dismissed)="showAlert(alert, false)"
             class="w-full mb-3"
         ></app-alert>
         }

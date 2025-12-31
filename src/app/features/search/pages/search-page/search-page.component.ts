@@ -1,5 +1,5 @@
 import { Component, input } from '@angular/core';
-import { pageTransform } from '../../../../shared/utils/transformers';
+import { pageTransform } from '../../../../shared/utils/transformers.util';
 import { SearchListComponent } from '../../components/search-list/search-list.component';
 
 @Component({

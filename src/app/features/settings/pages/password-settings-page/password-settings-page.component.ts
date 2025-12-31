@@ -1,8 +1,8 @@
 import { Component, inject, signal } from '@angular/core';
+import { createAlert, showAlert } from '../../../../shared/utils/alert.util';
 import { PasswordFormComponent } from '../../components/password-form/password-form.component';
 import { AlertComponent } from '../../../../shared/components/alert/alert.component';
 import { PasswordForm } from '../../models/password-form.model';
-import { Alert } from '../../../../shared/models/alert.model';
 import { UserService } from '../../../../core/user/services/user.service';
 import { AuthService } from '../../../../core/auth/services/auth.service';
 
@@ -17,11 +17,8 @@ export class PasswordSettingsPageComponent {
     authService = inject(AuthService);
 
     loading = signal(false);
-    alert = signal<Alert>({
-        type: 'error',
-        message: 'Ocorreu um erro.',
-        show: false,
-    });
+    alert = createAlert();
+    showAlert = showAlert;
 
     onChangePassword(credentials: PasswordForm) {
         this.userService

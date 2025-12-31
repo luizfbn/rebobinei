@@ -1,9 +1,9 @@
 import { Component, inject, signal, ViewChild, ViewContainerRef } from '@angular/core';
 import { filter, finalize, of, switchMap, tap } from 'rxjs';
+import { createAlert, showAlert } from '../../../../shared/utils/alert.util';
 import { AccountFormComponent } from '../../components/account-form/account-form.component';
 import { AlertComponent } from '../../../../shared/components/alert/alert.component';
 import { AccountForm } from '../../models/account-form.model';
-import { Alert } from '../../../../shared/models/alert.model';
 import { UserService } from '../../../../core/user/services/user.service';
 import { AuthService } from '../../../../core/auth/services/auth.service';
 import { PasswordConfirmModalService } from '../../../auth/modals/password-confirm-modal/password-confirm-modal.service';
@@ -23,11 +23,8 @@ export class AccountSettingsPageComponent {
     passwordConfirmModalContainer!: ViewContainerRef;
 
     loading = signal(false);
-    alert = signal<Alert>({
-        type: 'error',
-        message: 'Ocorreu um erro.',
-        show: false,
-    });
+    alert = createAlert();
+    showAlert = showAlert;
 
     onChangeAccount(credentials: AccountForm) {
         const currentUserData = {

@@ -10,11 +10,11 @@ import {
 } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { filter, finalize, switchMap, tap } from 'rxjs';
-import { pageTransform } from '../../../../shared/utils/transformers';
+import { pageTransform } from '../../../../shared/utils/transformers.util';
+import { createAlert, showAlert } from '../../../../shared/utils/alert.util';
 import { UserReviewListComponent } from '../../components/user-review-list/user-review-list.component';
 import { AlertComponent } from '../../../../shared/components/alert/alert.component';
 import { Profile } from '../../../../core/user/models/profile.model';
-import { Alert } from '../../../../shared/models/alert.model';
 import { ReviewContextService } from '../../../reviews/services/review-context.service';
 import { MovieService } from '../../../../core/movie/services/movie.service';
 import { AuthService } from '../../../../core/auth/services/auth.service';
@@ -44,11 +44,8 @@ export class ProfilePageComponent implements OnInit, OnDestroy {
     profile = input.required<Profile>();
 
     isDeletingReview = signal(false);
-    alert = signal<Alert>({
-        type: 'error',
-        message: 'Ocorreu um erro.',
-        show: false,
-    });
+    alert = createAlert();
+    showAlert = showAlert;
 
     ngOnInit() {
         this.reviewContext.setController(this.movieService);

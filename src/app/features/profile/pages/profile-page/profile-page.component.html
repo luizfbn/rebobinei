@@ -16,11 +16,11 @@
             </h3>
             <span class="block flex-1 h-[1px] rounded-lg bg-neutral-700 max-w-20"></span>
         </div>
-        @if(this.alert().show) {
+        @if(alert().show) {
         <app-alert
-            [type]="this.alert().type"
-            [message]="this.alert().message"
-            (dismissed)="this.alert().show = false"
+            [type]="alert().type"
+            [message]="alert().message"
+            (dismissed)="showAlert(alert, false)"
             class="bg-neutral-950 rounded-lg block sticky inset-0 top-30 sm:top-20 max-w-250 m-auto mb-6 z-1"
         ></app-alert>
         }

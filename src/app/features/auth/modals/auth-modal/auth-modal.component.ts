@@ -1,12 +1,12 @@
 import { Component, inject, output, signal } from '@angular/core';
 import { finalize } from 'rxjs';
 import { ModalRef } from '../../../../shared/modal/modal-ref';
+import { createAlert, showAlert } from '../../../../shared/utils/alert.util';
 import { LoginFormComponent } from '../../components/login-form/login-form.component';
 import { RegisterFormComponent } from '../../components/register-form/register-form.component';
 import { AlertComponent } from '../../../../shared/components/alert/alert.component';
 import { LoginForm } from '../../models/login-form.model';
 import { RegisterForm } from '../../models/register-form.model';
-import { Alert } from '../../../../shared/models/alert.model';
 import { AuthService } from '../../../../core/auth/services/auth.service';
 import { UserService } from '../../../../core/user/services/user.service';
 
@@ -28,11 +28,8 @@ export class AuthModalComponent {
 
     view = signal<'login' | 'register'>('login');
     loading = signal(false);
-    alert = signal<Alert>({
-        type: 'error',
-        message: 'Ocorreu um erro.',
-        show: false,
-    });
+    alert = createAlert();
+    showAlert = showAlert;
 
     onLogin(credentials: LoginForm) {
         this.loading.set(true);
@@ -75,7 +72,7 @@ export class AuthModalComponent {
     }
 
     setView(view: 'login' | 'register') {
-        this.alert().show = false;
+        this.showAlert(this.alert, false);
         this.view.set(view);
     }
 

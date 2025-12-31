@@ -29,11 +29,11 @@
         </div>
         @switch (step()) { @case (1) {
         <app-delete-confirm-step (confirm)="setStep(2)" (cancel)="closeModal()" />
-        } @case (2) { @if(this.alert().show) {
+        } @case (2) { @if(alert().show) {
         <app-alert
-            [type]="this.alert().type"
-            [message]="this.alert().message"
-            (dismissed)="this.alert().show = false"
+            [type]="alert().type"
+            [message]="alert().message"
+            (dismissed)="showAlert(alert, false)"
             class="mb-3"
         ></app-alert>
         }
