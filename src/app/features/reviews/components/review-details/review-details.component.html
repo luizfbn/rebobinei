@@ -17,8 +17,8 @@
             <h5 class="text-neutral-400 uppercase text-sm font-normal mb-4">
                 {{ review().movie.originalTitle }}
             </h5>
-            <p class="text-sm line-clamp-4">
-                {{ review().movie.overview }}
+            <p class="text-sm line-clamp-4" [class.text-neutral-500]="!review().movie.overview">
+                {{ review().movie.overview || 'Nenhuma sinopse informada.' }}
             </p>
         </div>
     </div>

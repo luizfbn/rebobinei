@@ -52,8 +52,11 @@
             <h5 class="text-2xl font-bold tracking-wide uppercase text-neutral-200 mb-1">
                 {{ movie.title }}
             </h5>
-            <p class="text-md font-normal text-neutral-200 line-clamp-4">
-                {{ movie.overview }}
+            <p
+                class="text-md font-normal text-neutral-200 line-clamp-4"
+                [class.text-neutral-400]="!movie.overview"
+            >
+                {{ movie.overview || 'Nenhuma sinopse informada.' }}
             </p>
         </div>
 

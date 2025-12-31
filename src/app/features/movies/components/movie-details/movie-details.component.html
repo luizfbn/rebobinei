@@ -93,8 +93,11 @@
                 <h2 class="text-xl font-semibold text-neutral-200 uppercase tracking-wide mb-4">
                     Sinopse
                 </h2>
-                <p class="text-neutral-300 leading-relaxed">
-                    {{ movieStateService.movie()?.overview }}
+                <p
+                    class="text-neutral-300 leading-relaxed"
+                    [class.text-neutral-500]="!movieStateService.movie()?.overview"
+                >
+                    {{ movieStateService.movie()?.overview || 'Nenhuma sinopse informada.' }}
                 </p>
             </div>
             <div>
@@ -110,6 +113,8 @@
                         </h4>
                         @for (director of movieStateService.movie()?.directors; track $index) {
                         <p class="text-sm text-neutral-300">{{ director }}</p>
+                        } @empty {
+                        <p class="text-sm text-neutral-300">Não informado</p>
                         }
                     </li>
                     <li>
