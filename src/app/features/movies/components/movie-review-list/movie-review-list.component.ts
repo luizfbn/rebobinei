@@ -33,7 +33,7 @@ export class MovieReviewListComponent {
             this.loadReviews();
         });
         this.reviewContext.reviewDeleted$.pipe(takeUntilDestroyed()).subscribe(() => {
-            this.navigateToPage(1);
+            this.page() === 1 ? this.loadReviews() : this.navigateToPage(1);
         });
     }
 

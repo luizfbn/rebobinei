@@ -39,16 +39,16 @@ export class ReviewDetailModalComponent {
     });
 
     closeModal() {
-        this.router.navigate(['../../'], {
+        return this.router.navigate(['../../'], {
             relativeTo: this.route,
             queryParamsHandling: 'preserve',
         });
     }
 
-    onDeleteReview(id: string) {
+    async onDeleteReview(id: string) {
         const controller = this.reviewContext.getController();
         if (!controller) {
-            this.closeModal();
+            await this.closeModal();
             return;
         }
 
@@ -64,9 +64,9 @@ export class ReviewDetailModalComponent {
                 finalize(() => this.deletingReview.set(false))
             )
             .subscribe({
-                next: () => {
+                next: async () => {
+                    await this.closeModal();
                     this.reviewContext.notifyDeleteSuccess(id);
-                    this.closeModal();
                 },
                 error: (err) => {
                     console.error(err);

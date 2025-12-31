@@ -42,7 +42,7 @@ export class UserReviewListComponent {
             this.loadUserReviews();
         });
         this.reviewContext.reviewDeleted$.pipe(takeUntilDestroyed()).subscribe(() => {
-            this.navigateToPage(1);
+            this.page() === 1 ? this.loadUserReviews() : this.navigateToPage(1);
         });
     }
 
