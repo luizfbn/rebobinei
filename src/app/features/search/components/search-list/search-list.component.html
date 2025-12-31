@@ -12,7 +12,7 @@
         <app-media-card
             [title]="movie.title"
             [subtitle]="movie.releaseDate | date : 'yyyy'"
-            [routerLink]="['/movies', movie.tmdbId]"
+            [customRouterLink]="['/movies', movie.tmdbId]"
         >
             <img
                 class="w-50 h-72 aspect-[7/10] rounded-lg"

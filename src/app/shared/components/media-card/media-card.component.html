@@ -1,7 +1,7 @@
-@if (routerLink()) {
+@if (customRouterLink()) {
 <a
-    [routerLink]="routerLink()"
-    class="flex flex-col gap-2 w-fit cursor-pointer hover:scale-105 transition-all group"
+    [routerLink]="customRouterLink()"
+    class="flex flex-col gap-2 w-fit cursor-pointer hover:scale-105 focus:scale-105 transition-all group"
 >
     <ng-container [ngTemplateOutlet]="cardContent"></ng-container>
 </a>
@@ -16,7 +16,9 @@
     </div>
 
     <div [style.max-width.px]="contentWidth()">
-        <h3 class="text-neutral-200 text-sm font-bold break-words group-hover:text-rose-400">
+        <h3
+            class="text-neutral-200 text-sm font-bold break-words group-hover:text-rose-400 group-focus:text-rose-400"
+        >
             {{ title() }}
         </h3>
         @if (subtitle()) {
