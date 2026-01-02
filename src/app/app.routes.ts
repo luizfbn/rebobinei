@@ -30,6 +30,7 @@ export const routes: Routes = [
             {
                 path: 'reviews/:id',
                 component: ReviewDetailModalComponent,
+                data: { preserveScroll: true },
                 resolve: {
                     review: reviewDetailsResolver,
                 },
@@ -50,6 +51,7 @@ export const routes: Routes = [
             {
                 path: 'reviews/:id',
                 component: ReviewDetailModalComponent,
+                data: { preserveScroll: true },
                 resolve: {
                     review: reviewDetailsResolver,
                 },
@@ -64,7 +66,11 @@ export const routes: Routes = [
             { path: '', redirectTo: 'account', pathMatch: 'full' },
             { path: 'account', component: AccountSettingsPageComponent },
             { path: 'password', component: PasswordSettingsPageComponent },
-            { path: 'delete', component: DeleteAccountModalComponent },
+            {
+                path: 'delete',
+                component: DeleteAccountModalComponent,
+                data: { preserveScroll: true },
+            },
         ],
     },
     { path: '**', component: HomePageComponent },
