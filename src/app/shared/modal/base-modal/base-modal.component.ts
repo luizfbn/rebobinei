@@ -1,9 +1,13 @@
 import {
     AfterViewInit,
     Component,
+    inject,
     Injector,
     input,
+    OnDestroy,
+    OnInit,
     output,
+    Renderer2,
     Type,
     ViewChild,
     ViewContainerRef,
@@ -15,14 +19,25 @@ import {
     templateUrl: './base-modal.component.html',
     styleUrl: './base-modal.component.css',
 })
-export class BaseModalComponent implements AfterViewInit {
+export class BaseModalComponent implements OnInit, OnDestroy, AfterViewInit {
+    renderer = inject(Renderer2);
+
     onClose = output<void>();
     contentComponent = input<Type<unknown>>();
     contentInjector = input<Injector>();
+
     isMouseDownOnOverlay = false;
 
     @ViewChild('contentHost', { read: ViewContainerRef, static: true })
     contentHost!: ViewContainerRef;
+
+    ngOnInit() {
+        this.renderer.addClass(document.body, 'overflow-hidden');
+    }
+
+    ngOnDestroy() {
+        this.renderer.removeClass(document.body, 'overflow-hidden');
+    }
 
     ngAfterViewInit() {
         const component = this.contentComponent();
