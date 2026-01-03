@@ -28,6 +28,10 @@
                 />
             </app-media-card>
         </li>
+        } @empty {
+        <li class="flex-1 text-center">
+            <p class="text-neutral-500">Nenhuma tendência encontrada.</p>
+        </li>
         } }
     </ul>
     @if (movies().data[5]) { @let movie = movies().data[5];
