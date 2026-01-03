@@ -1,0 +1,10 @@
+<section class="bg-neutral-950 container py-10 min-h-100">
+    <h1 class="text-neutral-200 font-bold text-2xl mb-6 px-5 tracking-wide uppercase sm:text-4xl">
+        Ops! Algo deu errado.
+    </h1>
+    <h2 class="text-neutral-400 mb-2 px-5">Não foi possível carregar a página no momento.</h2>
+    <p class="text-neutral-500 mb-10 px-5 text-sm">
+        {{ errorMessage() }}
+    </p>
+    <button class="btn-secondary mx-5" (click)="goHome()">Voltar ao início</button>
+</section>

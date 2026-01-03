@@ -1,7 +1,6 @@
-import { ErrorHandler, Injectable } from '@angular/core';
+import { ErrorHandler } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 
-@Injectable()
 export class GlobalErrorHandler implements ErrorHandler {
     handleError(error: unknown) {
         const timestamp = new Date().toISOString();

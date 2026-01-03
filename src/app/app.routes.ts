@@ -8,6 +8,8 @@ import { AccountSettingsPageComponent } from './features/settings/pages/account-
 import { PasswordSettingsPageComponent } from './features/settings/pages/password-settings-page/password-settings-page.component';
 import { DeleteAccountModalComponent } from './features/settings/modals/delete-account-modal/delete-account-modal.component';
 import { ReviewDetailModalComponent } from './features/reviews/modals/review-detail-modal/review-detail-modal.component';
+import { NotFoundComponent } from './core/error/pages/not-found/not-found.component';
+import { ErrorComponent } from './core/error/pages/error/error.component';
 import { movieDetailsResolver } from './features/movies/resolvers/movie-details.resolver';
 import { movieStatsResolver } from './features/movies/resolvers/movie-stats.resolver';
 import { reviewDetailsResolver } from './features/reviews/resolvers/review-details.resolver';
@@ -73,5 +75,7 @@ export const routes: Routes = [
             },
         ],
     },
-    { path: '**', component: HomePageComponent },
+    { path: 'not-found', component: NotFoundComponent },
+    { path: 'error', component: ErrorComponent },
+    { path: '**', redirectTo: '/not-found' },
 ];

@@ -6,12 +6,18 @@ import {
     provideBrowserGlobalErrorListeners,
     provideZoneChangeDetection,
 } from '@angular/core';
-import { provideRouter, withComponentInputBinding, withInMemoryScrolling } from '@angular/router';
+import {
+    provideRouter,
+    withComponentInputBinding,
+    withInMemoryScrolling,
+    withNavigationErrorHandler,
+} from '@angular/router';
 import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
 import { routes } from './app.routes';
 import { authInterceptor } from './core/auth/interceptors/auth.interceptor';
 import { errorInterceptor } from './core/error/interceptors/error.interceptor';
 import { GlobalErrorHandler } from './core/error/global-error-handler';
+import { navigationErrorHandler } from './core/error/navigation-error-handler';
 import { ScrollStrategyService } from './core/scroll/services/scroll-strategy.service';
 import { AuthService } from './core/auth/services/auth.service';
 
@@ -22,6 +28,7 @@ export const appConfig: ApplicationConfig = {
         provideRouter(
             routes,
             withComponentInputBinding(),
+            withNavigationErrorHandler(navigationErrorHandler),
             withInMemoryScrolling({
                 scrollPositionRestoration: 'disabled',
                 anchorScrolling: 'enabled',
