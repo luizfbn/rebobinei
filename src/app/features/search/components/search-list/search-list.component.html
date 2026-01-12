@@ -30,10 +30,10 @@
     } }
 </ul>
 @if (totalPages() > 1) {
-<app-page-selector
+<app-pagination
     class="flex justify-center"
+    [totalPages]="totalPages()"
     [currentPage]="page()"
     (currentPageChange)="navigateToPage($event)"
-    [totalPages]="totalPages()"
-></app-page-selector>
+></app-pagination>
 }

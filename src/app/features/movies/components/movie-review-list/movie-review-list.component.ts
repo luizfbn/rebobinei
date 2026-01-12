@@ -2,14 +2,14 @@ import { Component, effect, inject, input, output, signal } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MovieReviewItemComponent } from '../movie-review-item/movie-review-item.component';
-import { PageSelectorComponent } from '../../../../shared/components/page-selector/page-selector.component';
+import { PaginationComponent } from '../../../../shared/components/pagination/pagination.component';
 import { User } from '../../../../core/user/models/user.model';
 import { MovieStateService } from '../../services/movie-state.service';
 import { ReviewContextService } from '../../../reviews/services/review-context.service';
 
 @Component({
     selector: 'app-movie-review-list',
-    imports: [MovieReviewItemComponent, PageSelectorComponent],
+    imports: [MovieReviewItemComponent, PaginationComponent],
     templateUrl: './movie-review-list.component.html',
     styleUrl: './movie-review-list.component.css',
 })

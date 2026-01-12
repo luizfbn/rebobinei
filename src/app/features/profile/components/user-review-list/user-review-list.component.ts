@@ -2,7 +2,7 @@ import { Component, effect, inject, input, output, signal } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { UserReviewItemComponent } from '../user-review-item/user-review-item.component';
-import { PageSelectorComponent } from '../../../../shared/components/page-selector/page-selector.component';
+import { PaginationComponent } from '../../../../shared/components/pagination/pagination.component';
 import { Pagination } from '../../../../shared/models/pagination.model';
 import { ReviewWithMovie } from '../../../../core/review/models/review-with-movie.model';
 import { User } from '../../../../core/user/models/user.model';
@@ -11,7 +11,7 @@ import { ReviewContextService } from '../../../reviews/services/review-context.s
 
 @Component({
     selector: 'app-user-review-list',
-    imports: [UserReviewItemComponent, PageSelectorComponent],
+    imports: [UserReviewItemComponent, PaginationComponent],
     templateUrl: './user-review-list.component.html',
     styleUrl: './user-review-list.component.css',
 })

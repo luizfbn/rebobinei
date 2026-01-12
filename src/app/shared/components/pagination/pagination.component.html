@@ -1,0 +1,49 @@
+<ul class="inline-flex flex-wrap items-center gap-1 text-neutral-200">
+    <li>
+        <button
+            class="px-3 py-1 rounded-lg transition-colors hover:bg-neutral-900 hover:cursor-pointer disabled:opacity-80 disabled:cursor-not-allowed"
+            [disabled]="currentPage() === 1"
+            (click)="first()"
+        >
+            «
+        </button>
+    </li>
+
+    <li>
+        <button
+            class="px-3 py-1 rounded-lg transition-colors hover:bg-neutral-900 hover:cursor-pointer disabled:opacity-80 disabled:cursor-not-allowed"
+            [disabled]="currentPage() === 1"
+            (click)="prev()"
+        >
+            ‹
+        </button>
+    </li>
+
+    @for (p of visiblePages(); track p) {
+    <li>
+        <button [class]="currentPageBtnClasses()(p)" (click)="goTo(p)">
+            {{ p }}
+        </button>
+    </li>
+    }
+
+    <li>
+        <button
+            class="px-3 py-1 rounded-lg transition-colors hover:bg-neutral-900 hover:cursor-pointer disabled:opacity-80 disabled:cursor-not-allowed"
+            [disabled]="currentPage() === totalPages()"
+            (click)="next()"
+        >
+            ›
+        </button>
+    </li>
+
+    <li>
+        <button
+            class="px-3 py-1 rounded-lg transition-colors hover:bg-neutral-900 hover:cursor-pointer disabled:opacity-80 disabled:cursor-not-allowed"
+            [disabled]="currentPage() === totalPages()"
+            (click)="last()"
+        >
+            »
+        </button>
+    </li>
+</ul>

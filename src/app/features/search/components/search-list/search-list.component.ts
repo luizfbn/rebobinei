@@ -2,13 +2,13 @@ import { Component, effect, inject, input, signal } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MediaCardComponent } from '../../../../shared/components/media-card/media-card.component';
-import { PageSelectorComponent } from '../../../../shared/components/page-selector/page-selector.component';
+import { PaginationComponent } from '../../../../shared/components/pagination/pagination.component';
 import { MovieListItem } from '../../../../core/movie/models/movie-list-item.model';
 import { MovieService } from '../../../../core/movie/services/movie.service';
 
 @Component({
     selector: 'app-search-list',
-    imports: [MediaCardComponent, PageSelectorComponent, DatePipe],
+    imports: [MediaCardComponent, PaginationComponent, DatePipe],
     templateUrl: './search-list.component.html',
     styleUrl: './search-list.component.css',
 })
