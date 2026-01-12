@@ -1,13 +1,14 @@
-<div class="inline-flex gap-1" title="Nota {{ rating() }}">
+<div class="inline-flex gap-1 fill-tra" title="Nota {{ rating() }}">
     @for(item of items(); track $index) {
     <svg
         [class]="customClass()"
         [class.cursor-pointer]="!disabled()"
+        [class.fill-rose-500]="item <= rating()"
+        [class.fill-transparent]="item > rating()"
+        (click)="setRating(item)"
         width="12"
         height="12"
         viewBox="0 0 12 12"
-        [attr.fill]="item <= rating() ? '#FF2056' : 'transparent'"
-        (click)="setRating(item)"
         xmlns="http://www.w3.org/2000/svg"
     >
         <path
