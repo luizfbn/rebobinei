@@ -4,10 +4,11 @@ import { RestrictSpacesDirective } from '../../../../shared/directives/restrict-
 import { noWhitespaceValidator } from '../../../../shared/validators/no-whitespace.validator';
 import { noSpecialCharactersValidator } from '../../../../shared/validators/no-special-characters.validator';
 import { RegisterForm } from '../../models/register-form.model';
+import { PasswordInputComponent } from '../../../../shared/components/password-input/password-input.component';
 
 @Component({
     selector: 'app-register-form',
-    imports: [ReactiveFormsModule, RestrictSpacesDirective],
+    imports: [ReactiveFormsModule, RestrictSpacesDirective, PasswordInputComponent],
     templateUrl: './register-form.component.html',
     styleUrl: './register-form.component.css',
 })

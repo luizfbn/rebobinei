@@ -1,9 +1,10 @@
 import { Component, effect, input, output } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { PasswordInputComponent } from '../../../../shared/components/password-input/password-input.component';
 
 @Component({
     selector: 'app-password-confirm-form',
-    imports: [ReactiveFormsModule],
+    imports: [ReactiveFormsModule, PasswordInputComponent],
     templateUrl: './password-confirm-form.component.html',
     styleUrl: './password-confirm-form.component.css',
 })

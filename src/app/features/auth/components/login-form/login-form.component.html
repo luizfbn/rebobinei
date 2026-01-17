@@ -3,24 +3,24 @@
         <label for="email" class="text-sm font-semibold text-neutral-200">Email</label>
         <input id="email" class="input" type="email" formControlName="email" />
         @if (email?.invalid && email?.touched) {
-        <div class="text-xs font-normal text-rose-400">
-            @if (email?.hasError('required')) {
-            <p>Informe o email.</p>
-            } @else if (email?.hasError('email')) {
-            <p>Informe um email válido.</p>
-            }
-        </div>
+            <div class="text-xs font-normal text-rose-400">
+                @if (email?.hasError('required')) {
+                    <p>Informe o email.</p>
+                } @else if (email?.hasError('email')) {
+                    <p>Informe um email válido.</p>
+                }
+            </div>
         }
     </div>
     <div class="w-full mb-6 flex flex-col gap-1">
         <label for="password" class="text-sm font-semibold text-neutral-200">Senha</label>
-        <input id="password" class="input" type="password" formControlName="password" />
+        <app-password-input inputId="password" formControlName="password"></app-password-input>
         @if (password?.invalid && password?.touched) {
-        <div class="text-xs font-normal text-rose-400">
-            @if (password?.hasError('required')) {
-            <p>Informe a senha.</p>
-            }
-        </div>
+            <div class="text-xs font-normal text-rose-400">
+                @if (password?.hasError('required')) {
+                    <p>Informe a senha.</p>
+                }
+            </div>
         }
     </div>
     <button

@@ -1,10 +1,11 @@
 import { Component, input, output, effect } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { LoginForm } from '../../models/login-form.model';
+import { PasswordInputComponent } from '../../../../shared/components/password-input/password-input.component';
 
 @Component({
     selector: 'app-login-form',
-    imports: [ReactiveFormsModule],
+    imports: [ReactiveFormsModule, PasswordInputComponent],
     templateUrl: './login-form.component.html',
     styleUrl: './login-form.component.css',
 })

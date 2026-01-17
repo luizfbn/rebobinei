@@ -8,10 +8,11 @@ import {
     Validators,
 } from '@angular/forms';
 import { PasswordForm } from '../../models/password-form.model';
+import { PasswordInputComponent } from '../../../../shared/components/password-input/password-input.component';
 
 @Component({
     selector: 'app-password-form',
-    imports: [ReactiveFormsModule],
+    imports: [ReactiveFormsModule, PasswordInputComponent],
     templateUrl: './password-form.component.html',
     styleUrl: './password-form.component.css',
 })
@@ -31,7 +32,7 @@ export class PasswordFormComponent {
         },
         {
             validators: this.matchPasswordsValidator,
-        }
+        },
     );
 
     constructor() {
