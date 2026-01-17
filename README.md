@@ -1,59 +1,70 @@
-# Rebobinei
+<h1 align="center" style="font-weight: bold;">Rebobinei 🎬</h1>
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.2.1.
+<p align="center">
+  <a href="#layout">Layout</a> • 
+  <a href="#tech">Technologies</a> •
+  <a href="#started">Getting Started</a>
+</p>
 
-## Development server
+<p align="center">
+    <b>A platform to explore, rate, and review movies.</b>
+</p>
 
-To start a local development server, run:
+<p align="center">
+     <a href="https://rebobinei.vercel.app">📱 Visit this Project</a>
+</p>
 
-```bash
-ng serve
-```
+<h2 id="layout">🎨 Layout</h2>
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+<p align="center">
+    <img src="./public/assets/rebobinei-home.png" width="400px" alt="Home Page">
+    <img src="./public/assets/rebobinei-movie.png" width="400px" alt="Movie Details">
+</p>
 
-## Code scaffolding
+<h2 id="tech">💻 Technologies</h2>
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+- Angular
+- Tailwind
+- Docker & Docker Compose
 
-```bash
-ng generate component component-name
-```
+<h2 id="started">🚀 Getting started</h2>
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+<h3>Prerequisites</h3>
 
-```bash
-ng generate --help
-```
+- [NodeJS](https://nodejs.org/en/download)
+- [Git](https://git-scm.com/downloads)
+- [Docker](https://www.docker.com/) (Optional)
 
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+<h3>Cloning</h3>
 
 ```bash
-ng test
+git clone https://github.com/luizfbn/rebobinei.git
 ```
 
-## Running end-to-end tests
+<h3>Config environments variables</h3>
 
-For end-to-end (e2e) testing, run:
+Use the configuration folder `src/app/environments` to set your API URL.
 
 ```bash
-ng e2e
+apiUrl: '{ YOUR_API_URL }'
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+<h3>Starting</h3>
 
-## Additional Resources
+You can run it using Docker or locally.
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Via Docker:
+
+```bash
+cd rebobinei
+npm run compose:dev # Start development environment
+npm run compose:dev:down # Stop environment
+```
+
+Locally:
+
+```bash
+cd rebobinei
+npm install
+npm run start
+```
